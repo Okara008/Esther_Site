@@ -1,0 +1,310 @@
+[
+    {
+        "name": "small hair bands",
+        "images": [
+            "small_hair_bands.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 600,
+        "unit": "item",
+        "quantity": 1,
+        "size": {},
+        "variants": [],
+        "colors": [
+            "yellow",
+            "baby pink",
+            "hot pink",
+            "dark blue",
+            "baby blue",
+            "black",
+            "green",
+            "gold",
+            "orange",
+            "red",
+            "animal skin",
+            "purple"
+        ],
+        "isOutOfStock": false
+    },
+    {
+        "name": "pearl hair clips",
+        "images": [
+            "pearl_hair_clips.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 1000,
+        "unit": "item",
+        "quantity": 1,
+        "size": {},
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "kiama edge control",
+        "images": [
+            "kiama_edge_control.jpeg"
+        ],
+        "category": "hair care",
+        "price": 2500,
+        "unit": "item",
+        "quantity": 1,
+        "size": {},
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "got 2b edge control",
+        "images": [
+            "got_2b_edge_control.jpeg"
+        ],
+        "category": "hair care",
+        "price": 2500,
+        "unit": "item",
+        "quantity": 1,
+        "size": {},
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "big hair band",
+        "images": [
+            "big_hair_band.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 1000,
+        "unit": "item",
+        "quantity": 1,
+        "size": {},
+        "variants": [],
+        "colors": [
+            "brown",
+            "black",
+            "hot pink",
+            "red",
+            "baby blue",
+            "green",
+            "white"
+        ],
+        "isOutOfStock": false
+    },
+    {
+        "name": "hair net",
+        "images": [
+            "hair_net.jpeg"
+        ],
+        "category": "hair accessories",
+        "unit": "item",
+        "quantity": 1,
+        "size": {},
+        "variants": [
+            {
+                "name": "big",
+                "price": 1500,
+                "size": {
+                    "width": "21cm",
+                    "length": "30cm"
+                },
+                "color": ""
+            },
+            {
+                "name": "small",
+                "price": 800,
+                "size": {
+                    "width": "17cm",
+                    "length": "24cm"
+                },
+                "color": ""
+            }
+        ],
+        "isOutOfStock": false
+    },
+    {
+        "name": "large claw clip",
+        "images": [
+            "large_claw_clip-brown.jpeg",
+            "large_claw_clip-purple.jpeg",
+            "large_claw_clip-black.jpeg",
+            "large_claw_clip-pink.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 3500,
+        "unit": "item",
+        "quantity": 1,
+        "size": {
+            "length": "13cm"
+        },
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "hair clips",
+        "images": [
+            "hair_clips.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 2000,
+        "unit": "pack",
+        "quantity": 6,
+        "size": {
+            "length": "13cm"
+        },
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "claw clips",
+        "images": [
+            "claw_clips_1.jpeg",
+            "claw_clips_2.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 2500,
+        "unit": "item",
+        "quantity": 1,
+        "size": {
+            "length": "10cm"
+        },
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "flower claw clips",
+        "images": [
+            "flower_claw_clips.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 2500,
+        "unit": "item",
+        "quantity": 1,
+        "size": {
+            "length": "8cm"
+        },
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "large claw clips",
+        "images": [
+            "large_claw_clips.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 3500,
+        "unit": "item",
+        "quantity": 1,
+        "size": {
+            "length": "12cm"
+        },
+        "variants": [],
+        "colors": [
+            "black",
+            "brown"
+        ],
+        "isOutOfStock": false
+    },
+    {
+        "name": "hair ties",
+        "images": [
+            "hair_ties.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 500,
+        "unit": "pack",
+        "quantity": 6,
+        "size": {},
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "edges brush",
+        "images": [
+            "edges_brush.jpeg"
+        ],
+        "category": "hair brushes",
+        "price": 2000,
+        "unit": "item",
+        "quantity": 1,
+        "size": {},
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "Big wig brush",
+        "images": [
+            "Big_wig_brush.jpeg"
+        ],
+        "category": "hair brushes",
+        "price": 2000,
+        "unit": "item",
+        "quantity": 1,
+        "size": {},
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "octopus brush",
+        "images": [
+            "octopus_brush.jpeg"
+        ],
+        "category": "hair brushes",
+        "price": 2000,
+        "unit": "item",
+        "quantity": 1,
+        "size": {},
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "scrunchies",
+        "images": [
+            "scrunchies.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 600,
+        "unit": "item",
+        "quantity": 1,
+        "size": {
+            "length": "10cm"
+        },
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "bonnet",
+        "images": [
+            "bonnet.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 3000,
+        "unit": "item",
+        "quantity": 1,
+        "size": {},
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "big hair band",
+        "images": [
+            "big_hairband.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 1000,
+        "unit": "item",
+        "quantity": 1,
+        "size": {},
+        "variants": [],
+        "isOutOfStock": false
+    },
+    {
+        "name": "bow clips",
+        "images": [
+            "bow_clips.jpeg"
+        ],
+        "category": "hair accessories",
+        "price": 2000,
+        "unit": "item",
+        "quantity": 1,
+        "size": {},
+        "variants": [],
+        "isOutOfStock": false
+    }
+]

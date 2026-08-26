@@ -1,0 +1,23 @@
+:root {
+    --text: #2B2023;
+    --cards: #FFFFFF;
+    --bg: #FFF9FA;
+    --primary: #8E3A59;
+    --primary-hover: #762F49;
+    --secondary: #F3DDE5;
+    --muted-text: #796D71;
+    --border: #EADDE1;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--text: #F8EEF1;
+		--cards: #21191C;
+		--bg: #171214;
+		--primary: #D88BA5;
+		--primary-hover: #E3A2B8;
+		--secondary: #3A2830;
+		--muted-text: #B9A9AE;
+		--border: #49383E;
+    }
+}
