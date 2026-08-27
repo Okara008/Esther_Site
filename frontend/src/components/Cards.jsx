@@ -6,14 +6,17 @@ const productImages = import.meta.glob(
 const Cards = ({product}) => {
     const image = productImages[`../assets/product_pics/${product.images[0]}`]
 
-    return (<>
-        <small>{product.name}</small>
-        <img src={image} alt="profile images" height={100}/>
-        <span>{product.price}</span>
+    return (
+        <article 
+            // style={{backgroundImage: `url(${image})`}}
+        >
+            <img src={image} alt="product images" height={100} className="product_img"/>
+            <h2>{product.name}</h2>
+            <span>₦{product.price}</span><br />
 
-        <button>Add to Cart </button>
-        <br /><br />
-        </>)
+            <button>Add to Cart </button>
+        </article>
+    )
 }
 
 export default Cards

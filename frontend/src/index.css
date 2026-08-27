@@ -1,12 +1,12 @@
 :root {
     --text: #2B2023;
-    --cards: #FFFFFF;
+    --cards: #F3DDE5;
     --bg: #FFF9FA;
     --primary: #8E3A59;
     --primary-hover: #762F49;
     --secondary: #F3DDE5;
     --muted-text: #796D71;
-    --border: #EADDE1;
+    --border: #e6c3cd;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,6 +22,8 @@
     }
 }
 
+/* Header Styling */
+
 html{
     font-size: 16px;
     box-sizing: border-box;
@@ -32,7 +34,7 @@ html{
 
 body{
     margin: 0;
-    padding: 1rem;
+    padding: 0;
     background-color: var(--bg);
 }
 
@@ -40,9 +42,11 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
     
     background-color: var(--primary);
-    padding: 1rem;
+    padding: 1.5rem 1rem;
     margin-bottom: 2rem;
 }
 
@@ -81,6 +85,81 @@ header{
     cursor: pointer;
     
 }
+
 .search_icon img{
     height: 100%;
+}
+
+
+/* Product Category Styling */
+
+.product_category{
+    background-color: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.product_category div{
+    text-transform: capitalize;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.product_category .selected{
+    font-weight: bold;
+    border-bottom: .2rem solid var(--primary);
+}
+
+.whatsapp_icon{
+    width: 3rem;
+    position: fixed;
+    right: 3rem;
+    bottom: 5rem;
+}
+
+/* Product Display Section */
+
+section{
+    margin-block: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+section article{
+    /* width: 15rem;
+    height: 15rem; */
+    /* background-attachment: 'fixed';
+    background-position: 50%;
+    background-size: contain; */
+    background-color: var(--cards);
+    padding: 1rem;
+    border-radius: 2rem;
+}
+
+section h2{
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+}
+
+section .product_img{
+    width: 15rem;
+    height: 15rem;
+    border: .5rem solid var(--primary);
+    border-radius: 2rem;
+    /* height: 10rem; */
+}
+
+
+section button{
+    width: 100%;
+    padding: .4rem;
+    background-color: var(--primary);
+    color: #ffffff;
+    border: none;
+    margin-top: 1rem;
 }
