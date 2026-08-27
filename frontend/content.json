@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name": "small hair bands",
         "images": [
             "small_hair_bands.jpeg"
@@ -27,6 +28,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 2,
         "name": "pearl hair clips",
         "images": [
             "pearl_hair_clips.jpeg"
@@ -40,6 +42,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 3,
         "name": "kiama edge control",
         "images": [
             "kiama_edge_control.jpeg"
@@ -53,6 +56,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 4,
         "name": "got 2b edge control",
         "images": [
             "got_2b_edge_control.jpeg"
@@ -66,6 +70,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 5,
         "name": "big hair band",
         "images": [
             "big_hair_band.jpeg"
@@ -88,6 +93,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 6,
         "name": "hair net",
         "images": [
             "hair_net.jpeg"
@@ -119,6 +125,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 7,
         "name": "large claw clip",
         "images": [
             "large_claw_clip-brown.jpeg",
@@ -137,6 +144,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 8,
         "name": "hair clips",
         "images": [
             "hair_clips.jpeg"
@@ -152,6 +160,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 9,
         "name": "claw clips",
         "images": [
             "claw_clips_1.jpeg",
@@ -168,6 +177,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 10,
         "name": "flower claw clips",
         "images": [
             "flower_claw_clips.jpeg"
@@ -183,6 +193,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 11,
         "name": "large claw clips",
         "images": [
             "large_claw_clips.jpeg"
@@ -202,6 +213,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 12,
         "name": "hair ties",
         "images": [
             "hair_ties.jpeg"
@@ -215,6 +227,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 13,
         "name": "edges brush",
         "images": [
             "edges_brush.jpeg"
@@ -228,9 +241,10 @@
         "isOutOfStock": false
     },
     {
-        "name": "Big wig brush",
+        "id": 14,
+        "name": "big wig brush",
         "images": [
-            "Big_wig_brush.jpeg"
+            "big_wig_brush.jpeg"
         ],
         "category": "hair brushes",
         "price": 2000,
@@ -241,6 +255,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 15,
         "name": "octopus brush",
         "images": [
             "octopus_brush.jpeg"
@@ -254,6 +269,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 16,
         "name": "scrunchies",
         "images": [
             "scrunchies.jpeg"
@@ -269,6 +285,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 17,
         "name": "bonnet",
         "images": [
             "bonnet.jpeg"
@@ -282,6 +299,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 18,
         "name": "big hair band",
         "images": [
             "big_hairband.jpeg"
@@ -295,6 +313,7 @@
         "isOutOfStock": false
     },
     {
+        "id": 19,
         "name": "bow clips",
         "images": [
             "bow_clips.jpeg"

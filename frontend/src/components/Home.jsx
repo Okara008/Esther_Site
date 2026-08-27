@@ -1,7 +1,24 @@
 import Cards from "./Cards"
+import products from "../../content.json"
+import WHATSAPP_ICON from '../assets/icons/whatsapp_colored.png'
+import {useState} from 'react';
 
 const Home = () => {
-    return <h2>Home</h2>
+    const [productCategories] = useState(["hair accessories", "hair care", "hair brushes"])
+    console.log(products[0]);
+    return(
+        <main>
+            <nav>
+                {productCategories.map(productCategory => <div>{productCategory}</div>)}
+            </nav>
+
+            <img src={WHATSAPP_ICON} alt="Whatsapp Chat" title="Chat on Whatsapp" height={50}/>
+
+            <section>
+                {products.map(product => <Cards product={product} key={products.indexOf(product)}/> )}
+            </section>
+        </main>
+    )
 }
 
 export default Home
