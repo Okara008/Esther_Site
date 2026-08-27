@@ -9,8 +9,8 @@
     --border: #e6c3cd;
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
+[data-theme="dark"] {
+	/* :root { */
 		--text: #F8EEF1;
 		--cards: #21191C;
 		--bg: #171214;
@@ -19,7 +19,7 @@
 		--secondary: #3A2830;
 		--muted-text: #B9A9AE;
 		--border: #49383E;
-    }
+    /* } */
 }
 
 /* Header Styling */
@@ -90,6 +90,15 @@ header{
     height: 100%;
 }
 
+.theme_icon:hover{
+    /* filter: drop-shadow(0 0 10px var(--bg)); */
+    cursor: pointer;
+}
+
+.togggle_theme{
+    transform: rotate(180deg);
+}
+
 
 /* Product Category Styling */
 
@@ -130,7 +139,7 @@ section{
     justify-content: space-evenly;
 }
 
-section article{
+section .article{
     /* width: 15rem;
     height: 15rem; */
     /* background-attachment: 'fixed';
@@ -139,6 +148,13 @@ section article{
     background-color: var(--cards);
     padding: 1rem;
     border-radius: 2rem;
+    cursor: pointer;
+    color: var(--text);
+    text-decoration: none;
+}
+
+section .article:hover{
+    box-shadow: 0 0 10px black;
 }
 
 section h2{
@@ -161,6 +177,7 @@ section button{
     color: #ffffff;
     border: none;
     margin-top: 1rem;
+    border-radius: 2rem;
 }
 
 /* Footer */
@@ -169,4 +186,19 @@ footer{
     background-color: var(--secondary);
     margin-top: 2rem;
     padding-block: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 2rem;
+}
+
+.social_handles{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+footer .social_handles img{
+    height: 1.5rem;
 }

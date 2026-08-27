@@ -1,6 +1,7 @@
 import Cards from "./Cards"
 import products from "../../content.json"
 import WHATSAPP_ICON from '../assets/icons/whatsapp_colored.png'
+import { Link } from 'react-router';
 import {useState} from 'react';
 
 const Home = () => {
@@ -13,7 +14,9 @@ const Home = () => {
                 {productCategories.map(productCategory => <div>{productCategory}</div>)}
             </nav>
 
-            <img src={WHATSAPP_ICON} alt="Whatsapp Chat" title="Chat on Whatsapp" className="whatsapp_icon"/>
+            <a href="https://wa.me/2348100153987">
+                <img src={WHATSAPP_ICON} alt="Whatsapp Chat" title="Chat on Whatsapp" className="whatsapp_icon"/>
+            </a>
 
             <section>
                 {products.map(product => <Cards product={product} key={products.indexOf(product)}/> )}
