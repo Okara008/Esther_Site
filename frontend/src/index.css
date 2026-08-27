@@ -14,7 +14,7 @@
 		--text: #F8EEF1;
 		--cards: #21191C;
 		--bg: #171214;
-		--primary: #D88BA5;
+		--primary: #B06A7F;
 		--primary-hover: #E3A2B8;
 		--secondary: #3A2830;
 		--muted-text: #B9A9AE;
@@ -154,7 +154,6 @@ section .product_img{
     /* height: 10rem; */
 }
 
-
 section button{
     width: 100%;
     padding: .4rem;
@@ -162,4 +161,12 @@ section button{
     color: #ffffff;
     border: none;
     margin-top: 1rem;
+}
+
+/* Footer */
+footer{
+    text-align: center;
+    background-color: var(--secondary);
+    margin-top: 2rem;
+    padding-block: 2rem;
 }
