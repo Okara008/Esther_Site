@@ -14,9 +14,9 @@ const Home = () => {
                 {productCategories.map(productCategory => <div>{productCategory}</div>)}
             </nav>
 
-            <a href="https://wa.me/2348100153987">
+            <a target="_blank" href="https://wa.me/2348100153987">
                 <img src={WHATSAPP_ICON} alt="Whatsapp Chat" title="Chat on Whatsapp" className="whatsapp_icon"/>
-            </a>
+            </a>   
 
             <section>
                 {products.map(product => <Cards product={product} key={products.indexOf(product)}/> )}

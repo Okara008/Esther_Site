@@ -1,0 +1,39 @@
+/* Product Category Styling */
+
+.product_category{
+    background-color: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.product_category div{
+    text-transform: capitalize;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.product_category .selected{
+    font-weight: bold;
+    border-bottom: .2rem solid var(--primary);
+}
+
+.whatsapp_icon{
+    width: 3rem;
+    position: fixed;
+    right: 3rem;
+    bottom: 5rem;
+}
+
+/* Product Display Section */
+
+section{
+    margin-block: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    align-items: center;
+    justify-content: space-evenly;
+}
+

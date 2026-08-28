@@ -1,0 +1,26 @@
+.productContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100%;
+    padding: .5rem 2rem;
+    height: 30rem;
+    gap: 1rem;
+    text-align: start;
+}
+
+article.productContainer .product_img{
+    border: 5px solid var(--primary);
+    height: 100%;
+    display: block;
+}
+
+.article_name{
+    text-transform: uppercase;
+    font-size: 3rem;
+
+}
+
+.article_category{
+    font-size: 1.5rem;
+    text-transform: capitalize;
+}

@@ -9,7 +9,6 @@
         "price": 600,
         "unit": "item",
         "quantity": 1,
-        "size": {},
         "variants": [],
         "colors": [
             "yellow",
@@ -25,7 +24,13 @@
             "animal skin",
             "purple"
         ],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     },
     {
         "id": 2,
@@ -37,9 +42,14 @@
         "price": 1000,
         "unit": "item",
         "quantity": 1,
-        "size": {},
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     },
     {
         "id": 3,
@@ -51,9 +61,14 @@
         "price": 2500,
         "unit": "item",
         "quantity": 1,
-        "size": {},
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     },
     {
         "id": 4,
@@ -65,9 +80,14 @@
         "price": 2500,
         "unit": "item",
         "quantity": 1,
-        "size": {},
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     },
     {
         "id": 5,
@@ -79,7 +99,6 @@
         "price": 1000,
         "unit": "item",
         "quantity": 1,
-        "size": {},
         "variants": [],
         "colors": [
             "brown",
@@ -90,7 +109,13 @@
             "green",
             "white"
         ],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     },
     {
         "id": 6,
@@ -101,28 +126,37 @@
         "category": "hair accessories",
         "unit": "item",
         "quantity": 1,
-        "size": {},
         "variants": [
             {
                 "name": "big",
                 "price": 1500,
-                "size": {
-                    "width": "21cm",
-                    "length": "30cm"
-                },
-                "color": ""
+                "color": "",
+                "others": [
+                    {
+                        "name": "size",
+                        "value": "21cm x 30cm"
+                    }
+                ]
             },
             {
                 "name": "small",
                 "price": 800,
-                "size": {
-                    "width": "17cm",
-                    "length": "24cm"
-                },
-                "color": ""
+                "color": "",
+                "others": [
+                    {
+                        "name": "size",
+                        "value": "17cm x 24cm"
+                    }
+                ]
             }
         ],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     },
     {
         "id": 7,
@@ -137,11 +171,14 @@
         "price": 3500,
         "unit": "item",
         "quantity": 1,
-        "size": {
-            "length": "13cm"
-        },
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": "13cm"
+            }
+        ]
     },
     {
         "id": 8,
@@ -153,11 +190,14 @@
         "price": 2000,
         "unit": "pack",
         "quantity": 6,
-        "size": {
-            "length": "13cm"
-        },
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": "13cm"
+            }
+        ]
     },
     {
         "id": 9,
@@ -170,11 +210,14 @@
         "price": 2500,
         "unit": "item",
         "quantity": 1,
-        "size": {
-            "length": "10cm"
-        },
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": "10cm"
+            }
+        ]
     },
     {
         "id": 10,
@@ -186,11 +229,14 @@
         "price": 2500,
         "unit": "item",
         "quantity": 1,
-        "size": {
-            "length": "8cm"
-        },
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": "8cm"
+            }
+        ]
     },
     {
         "id": 11,
@@ -202,15 +248,18 @@
         "price": 3500,
         "unit": "item",
         "quantity": 1,
-        "size": {
-            "length": "12cm"
-        },
         "variants": [],
         "colors": [
             "black",
             "brown"
         ],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": "12cm"
+            }
+        ]
     },
     {
         "id": 12,
@@ -222,9 +271,14 @@
         "price": 500,
         "unit": "pack",
         "quantity": 6,
-        "size": {},
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     },
     {
         "id": 13,
@@ -236,9 +290,14 @@
         "price": 2000,
         "unit": "item",
         "quantity": 1,
-        "size": {},
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     },
     {
         "id": 14,
@@ -250,9 +309,14 @@
         "price": 2000,
         "unit": "item",
         "quantity": 1,
-        "size": {},
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     },
     {
         "id": 15,
@@ -264,9 +328,14 @@
         "price": 2000,
         "unit": "item",
         "quantity": 1,
-        "size": {},
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     },
     {
         "id": 16,
@@ -278,11 +347,14 @@
         "price": 600,
         "unit": "item",
         "quantity": 1,
-        "size": {
-            "length": "10cm"
-        },
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": "10cm"
+            }
+        ]
     },
     {
         "id": 17,
@@ -294,9 +366,14 @@
         "price": 3000,
         "unit": "item",
         "quantity": 1,
-        "size": {},
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     },
     {
         "id": 18,
@@ -308,9 +385,14 @@
         "price": 1000,
         "unit": "item",
         "quantity": 1,
-        "size": {},
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     },
     {
         "id": 19,
@@ -322,8 +404,13 @@
         "price": 2000,
         "unit": "item",
         "quantity": 1,
-        "size": {},
         "variants": [],
-        "isOutOfStock": false
+        "isOutOfStock": false,
+        "others": [
+            {
+                "name": "size",
+                "value": ""
+            }
+        ]
     }
 ]

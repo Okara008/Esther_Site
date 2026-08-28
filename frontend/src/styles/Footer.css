@@ -1,0 +1,21 @@
+footer{
+    text-align: center;
+    background-color: var(--secondary);
+    margin-top: 2rem;
+    padding-block: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 2rem;
+}
+
+.social_handles{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+footer .social_handles img{
+    height: 1.5rem;
+}

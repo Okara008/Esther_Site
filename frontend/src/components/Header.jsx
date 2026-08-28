@@ -2,10 +2,18 @@ import LOGO_ICON from '../assets/icon_black.png'
 import CART_ICON from '../assets/icons/shopping-cart.png'
 import SEARCH_ICON from '../assets/icons/search.png'
 import THEME_ICON from '../assets/dark_theme.png'
-import { useState } from "react";
+import { useState , useEffect } from "react";
 
 const Header = () => {
-    const [darkMode, setDarkMode] = useState(false);
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const [darkMode, setDarkMode] = useState(mediaQuery);
+
+    useEffect(() => {
+        document.documentElement.setAttribute(
+            "data-theme",
+            mediaQuery ? "dark" : "light"
+        );
+    }, [])
 
     const toggleTheme = () => {
         setDarkMode(prev => {

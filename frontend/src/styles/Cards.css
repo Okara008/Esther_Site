@@ -1,0 +1,34 @@
+section .article{
+    background-color: var(--cards);
+    padding: 1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    color: var(--text);
+    text-decoration: none;
+}
+
+section .article:hover{
+    box-shadow: 0 0 10px var(--text);
+}
+
+section h2{
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+}
+
+section .product_img{
+    width: 15rem;
+    height: 15rem;
+    border: .5rem solid var(--primary);
+    border-radius: 2rem;
+}
+
+section button{
+    width: 100%;
+    padding: .4rem;
+    background-color: var(--primary);
+    color: #ffffff;
+    border: none;
+    margin-top: 1rem;
+    border-radius: 2rem;
+}
