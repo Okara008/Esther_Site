@@ -1,5 +1,6 @@
 :root {
     --text: #2B2023;
+    --inverted-text: white;
     --cards: #F3DDE5;
     --bg: #FFF9FA;
     --primary: #8E3A59;
@@ -11,6 +12,7 @@
 
 [data-theme="dark"] {
     --text: #F8EEF1;
+    --inverted-text: black;
     --cards: #21191C;
     --bg: #171214;
     --primary: #B06A7F;
@@ -20,6 +22,8 @@
     --border: #49383E;
 }
 
-/* *{
-    box-sizing: border-box;
-} */
+*{
+    /* box-sizing: border-box; */
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}

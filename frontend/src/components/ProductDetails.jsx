@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { useState, useRef } from 'react';
 import products from "../../content.json"
-import { p } from "react-router/dist/development/instrumentation-Dkmpzd13";
+
 const productImages = import.meta.glob(
     "../assets/product_pics/*",
     { eager: true, query: "?url", import: "default" }
@@ -39,24 +39,24 @@ const ProductDetails = () => {
                 
                 <>
                     <p className="article_price">₦<b>{product.price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
-                    
-                    {/* {product.others.length && 
-                        product.others.map(prop => (<p>{prop.name}</p>))
-                    } */}
+                    {Boolean(product.others.length)  && 
+                        product.others.map(prop => (<> <span>{prop.name}</span>: <span>{prop.value}</span></>))
+                    }
+                    <p> Total: <strong>₦{product.price * counter}</strong></p>
                 </>
             }
 
-            <div className="counter">
+            <div className="article_counter">
                 <button onClick={() => setCounter(prev => {
                     let copy = prev
                     if (copy < 1) return copy
                     return copy - 1
                 })}>-</button>
-                <button>{counter}</button>
+                <input type="text" value={counter}  onChange={(e) => setCounter(prev => (isNaN(Number(e.target.value)) ? prev : Number(e.target.value)))} inputMode="numeric"/>
                 <button onClick={() => setCounter(prev => prev + 1)}>+</button>
             </div>
 
-            <button> Add to cart</button>
+            <button className="article_button"> Add to cart</button>
         </div>
     </article>
     )

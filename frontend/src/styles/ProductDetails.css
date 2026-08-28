@@ -24,3 +24,53 @@ article.productContainer .product_img{
     font-size: 1.5rem;
     text-transform: capitalize;
 }
+
+.article_button{
+    width: 100%;
+    font-size: 1rem;
+    padding: .5rem;
+    margin-block: 1rem;
+    background-color: var(--primary);
+    border: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.article_button:hover{
+    background-color: var(--primary-hover);
+    cursor: pointer;
+}
+
+.article_button:active{
+    transform: scale(.99);
+}
+
+.article_counter{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .5rem;
+    margin-block: 1rem;
+}
+
+.article_counter button{
+    width: 2rem;
+    background-color: var(--secondary);
+    border: none;
+    color: var(--muted-text);
+}
+
+.article_counter button:hover{
+    width: 2rem;
+    background-color: var(--primary-hover);
+    border: none;
+    color: var(--inverted-text);
+    cursor: pointer;
+}
+
+.article_counter input{
+    border: none;
+    background-color: var(--text);
+    width: 5rem;
+    text-align: center;
+    color: var(--inverted-text);
+}

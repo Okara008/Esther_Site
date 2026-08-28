@@ -1,3 +1,5 @@
+import { Link } from 'react-router';
+
 import LOGO_ICON from '../assets/icon_black.png'
 import CART_ICON from '../assets/icons/shopping-cart.png'
 import SEARCH_ICON from '../assets/icons/search.png'
@@ -30,7 +32,7 @@ const Header = () => {
 
     return (
         <header>
-            <img src={LOGO_ICON} alt="icon" height={50} className='logo_icon'/>
+            <Link to='/'><img src={LOGO_ICON} alt="icon" height={50} className='logo_icon'/></Link>
             
             <div className="search_container">
                 <input type="text" placeholder='Search...' className='search_input'/>

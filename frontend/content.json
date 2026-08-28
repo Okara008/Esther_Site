@@ -25,12 +25,7 @@
             "purple"
         ],
         "isOutOfStock": false,
-        "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
-        ]
+        "others": []
     },
     {
         "id": 2,
@@ -44,12 +39,7 @@
         "quantity": 1,
         "variants": [],
         "isOutOfStock": false,
-        "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
-        ]
+        "others": []
     },
     {
         "id": 3,
@@ -63,12 +53,7 @@
         "quantity": 1,
         "variants": [],
         "isOutOfStock": false,
-        "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
-        ]
+        "others": []
     },
     {
         "id": 4,
@@ -82,12 +67,7 @@
         "quantity": 1,
         "variants": [],
         "isOutOfStock": false,
-        "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
-        ]
+        "others": []
     },
     {
         "id": 5,
@@ -110,12 +90,7 @@
             "white"
         ],
         "isOutOfStock": false,
-        "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
-        ]
+        "others": []
     },
     {
         "id": 6,
@@ -151,12 +126,7 @@
             }
         ],
         "isOutOfStock": false,
-        "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
-        ]
+        "others": []
     },
     {
         "id": 7,
@@ -273,12 +243,7 @@
         "quantity": 6,
         "variants": [],
         "isOutOfStock": false,
-        "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
-        ]
+        "others": []
     },
     {
         "id": 13,
@@ -292,12 +257,7 @@
         "quantity": 1,
         "variants": [],
         "isOutOfStock": false,
-        "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
-        ]
+        "others": []
     },
     {
         "id": 14,
@@ -312,10 +272,6 @@
         "variants": [],
         "isOutOfStock": false,
         "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
         ]
     },
     {
@@ -330,12 +286,7 @@
         "quantity": 1,
         "variants": [],
         "isOutOfStock": false,
-        "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
-        ]
+        "others": []
     },
     {
         "id": 16,
@@ -368,12 +319,7 @@
         "quantity": 1,
         "variants": [],
         "isOutOfStock": false,
-        "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
-        ]
+        "others": []
     },
     {
         "id": 18,
@@ -387,12 +333,7 @@
         "quantity": 1,
         "variants": [],
         "isOutOfStock": false,
-        "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
-        ]
+        "others": []
     },
     {
         "id": 19,
@@ -406,11 +347,6 @@
         "quantity": 1,
         "variants": [],
         "isOutOfStock": false,
-        "others": [
-            {
-                "name": "size",
-                "value": ""
-            }
-        ]
+        "others": []
     }
 ]
