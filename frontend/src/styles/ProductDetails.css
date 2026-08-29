@@ -11,13 +11,39 @@
 article.productContainer .product_img{
     border: 5px solid var(--primary);
     height: 100%;
+    z-index: 1;
+    position: relative;
+    width: fit-content;
+}
+
+.product_img .img_nav button{
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
+    background-color: var(--secondary);
+    color: var(--text);
+    font-size: 1.5rem;
+    border: none;
+    transform: translateY(-50%);
+}
+.product_img .img_nav button:hover{
+    background-color: var(--muted-text);
+    color: var(--inverted-text);
+}
+
+.product_img .img_nav button:active{
+    transform: translateX(-.1px);
+}
+
+article.productContainer .product_img img{
+    height: 100%;
     display: block;
 }
 
 .article_name{
     text-transform: uppercase;
     font-size: 3rem;
-
+    margin-top: 0;
 }
 
 .article_category{
@@ -33,6 +59,7 @@ article.productContainer .product_img{
     background-color: var(--primary);
     border: none;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    color: var(--inverted-text);
 }
 
 .article_button:hover{
@@ -73,4 +100,58 @@ article.productContainer .product_img{
     width: 5rem;
     text-align: center;
     color: var(--inverted-text);
+}
+
+.variant_details{
+    display: flex;
+    gap: 2rem;
+}
+
+.variant_details label{
+    display: block;
+    width: fit-content;
+    background-color: var(--text);
+    color: var(--inverted-text);
+    padding: 1rem;
+    border: 3px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.variant_details h4{
+    margin: 0;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+}
+
+.variant_details .variant_price b{
+    text-decoration: underline;
+}
+
+.variant_details input[type = "radio"]{
+    display: none;
+}
+
+.variant_details input[type = "radio"]:checked + label{
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: black;
+    box-shadow: 1px 1px 10px var(--text) inset;
+}
+.variant_details input[type = "radio"]:checked + label:after{
+    content: '---';
+}
+
+.article_color{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    text-transform: capitalize;
+    gap: 2rem;
+    background-color: var(--secondary);
+    padding: 1rem;
 }

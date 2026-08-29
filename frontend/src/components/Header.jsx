@@ -43,7 +43,7 @@ const Header = () => {
                 src={THEME_ICON} alt="icon" height={50} 
                 className={`${darkMode ? "togggle_theme" : ""} theme_icon`} 
                 onClick={toggleTheme}
-                title={`${darkMode ? "Dark Theme" : "Light Theme"}`} 
+                title={`${darkMode ? "Dark Mode" : "Light Mode"}`} 
             />
             <img src={CART_ICON} alt="cart" height={50} className='cart_icon'/>
         </header>

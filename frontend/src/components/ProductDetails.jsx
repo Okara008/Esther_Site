@@ -10,6 +10,7 @@ const productImages = import.meta.glob(
 const ProductDetails = () => {
     const { id } = useParams()
     const [product] = useState(products[id])
+    const [checkedVariant, setCheckedVariant] = useState(0)
     const [imageCounter, setImageCounter] = useState(0)
     let IMGS = []
 
@@ -18,22 +19,52 @@ const ProductDetails = () => {
     for (let i = 0; i < product.images.length; i++) {
         let image = product.images[i];
         image = productImages[`../assets/product_pics/${image}`];
-        console.log(IMGS);
         IMGS.push(image)
     }
 
-    console.log(products[id]);
     return (
     <article className="productContainer">
-        <img src={IMGS[imageCounter]} alt="Product Image" className="product_img"/>
+        <div  className="product_img">
+            <img src={IMGS[imageCounter]} alt="Product Image"/>
+            <div className="img_nav">
+                <button style={{left: 0}} onClick={() => setImageCounter(prev => ((prev + 1) % IMGS.length))}>&lt;</button>
+                <button style={{right: 0}} onClick={() => setImageCounter(prev => ((prev - 1) > 0 ? (prev - 1) : (IMGS.length-1) ))}>&gt;</button>
+            </div>
+        </div>
         <div>
             <h3 className="article_name">{product.name}</h3>
-            <p className="article_category">{product.category}</p>
+            <p className="article_category">-{product.category}-</p>
 
-            {
-                product.variants.length ?
-                
-                <p>sddd</p>
+
+            {product.colors?.length &&
+                <div className="article_color">
+                    {product.colors.map(color => (
+                        <div>
+                            <input type="checkbox" id={product.colors.indexOf(color)}/>
+                            <label htmlFor={product.colors.indexOf(color)}>{color}</label>
+                        </div>
+                    ))}
+                </div>
+            }
+
+            {product.variants.length ?
+                <>
+                    <div className="variant_details">
+                    {product.variants.map(variant => (
+                        <>  
+                            <input type="radio" name="product" id={product.variants.indexOf(variant)} checked={checkedVariant == (product.variants.indexOf(variant))} onClick={() => setCheckedVariant(product.variants.indexOf(variant))}/>
+                            <label htmlFor={product.variants.indexOf(variant)} >
+                                <h4 className="variant_name">{variant.name}</h4>
+                                <p className="variant_price">₦<b>{variant.price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
+                                {Boolean(variant.others.length)  && 
+                                    variant.others.map(prop => (<div> <strong>{prop.name}</strong>: <span>{prop.value}</span></div>))
+                                }
+                            </label>
+                        </>
+                    ))}
+                    </div>
+                    <p> Total: <strong>₦{product.variants[checkedVariant]?.price * counter}</strong></p>
+                </>
                 
                 :
                 
