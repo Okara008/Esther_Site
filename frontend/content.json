@@ -103,6 +103,7 @@
         "quantity": 1,
         "variants": [
             {
+                "id": 1,
                 "name": "big",
                 "price": 1500,
                 "color": "",
@@ -114,6 +115,7 @@
                 ]
             },
             {
+                "id": 2,
                 "name": "small",
                 "price": 800,
                 "color": "",

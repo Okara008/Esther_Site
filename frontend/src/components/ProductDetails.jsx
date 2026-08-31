@@ -7,14 +7,17 @@ const productImages = import.meta.glob(
     { eager: true, query: "?url", import: "default" }
 )
 
-const ProductDetails = () => {
+
+const ProductDetails = ({setSelectedProducts}) => {
     const { id } = useParams()
     const [product] = useState(products[id])
     const [checkedVariant, setCheckedVariant] = useState(0)
     const [imageCounter, setImageCounter] = useState(0)
+    const colorRefs = useRef([])
+    const variantRefs = useRef([])
     let IMGS = []
-
-    const [counter, setCounter] = useState(0)
+    
+    const [counter, setCounter] = useState(1)
 
     for (let i = 0; i < product.images.length; i++) {
         let image = product.images[i];
@@ -34,6 +37,7 @@ const ProductDetails = () => {
                 </div>
             )}
         </div>
+
         <div>
             <h3 className="article_name">{product.name}</h3>
             <p className="article_category">-{product.category}-</p>
@@ -41,9 +45,11 @@ const ProductDetails = () => {
 
             {product.colors?.length &&
                 <div className="article_color">
-                    {product.colors.map(color => (
-                        <div>
-                            <input type="checkbox" id={product.colors.indexOf(color)}/>
+                    {product.colors.map((color, index) => (
+                        <div key={index}>
+                            <input type="checkbox" id={product.colors.indexOf(color)} name={color}
+                                ref={el => colorRefs.current[index] = el}
+                            />
                             <label htmlFor={product.colors.indexOf(color)}>{color}</label>
                         </div>
                     ))}
@@ -53,9 +59,9 @@ const ProductDetails = () => {
             {product.variants.length ?
                 <>
                     <div className="variant_details">
-                    {product.variants.map(variant => (
+                    {product.variants.map((variant, index) => (
                         <>  
-                            <input type="radio" name="product" id={product.variants.indexOf(variant)} checked={checkedVariant == (product.variants.indexOf(variant))} onClick={() => setCheckedVariant(product.variants.indexOf(variant))}/>
+                            <input type="checkbox" name={variant.name} variantRefs={el => variantRefs.current[index] = el} id={product.variants.indexOf(variant)} onClick={() => setCheckedVariant(product.variants.indexOf(variant))}/>
                             <label htmlFor={product.variants.indexOf(variant)} >
                                 <h4 className="variant_name">{variant.name}</h4>
                                 <p className="variant_price">₦<b>{variant.price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
@@ -83,14 +89,45 @@ const ProductDetails = () => {
             <div className="article_counter">
                 <button onClick={() => setCounter(prev => {
                     let copy = prev
-                    if (copy < 1) return copy
+                    if (copy <= 1) return copy
                     return copy - 1
                 })}>-</button>
-                <input type="text" value={counter}  onChange={(e) => setCounter(prev => (isNaN(Number(e.target.value)) ? prev : Number(e.target.value)))} inputMode="numeric"/>
+
+                <input type="text" value={counter} inputMode="numeric"
+                    onChange={(e) => 
+                        setCounter(prev => {
+                            const num = Number(e.target.value)
+                            if(isNaN(num)){
+                                return prev
+                            }
+                            return num
+                        })
+                    } 
+                    onBlur={(e) => setCounter(prev => {
+                            const num = Number(e.target.value)
+                            if(num < 1){
+                                return 1
+                            }
+                        })
+                    }
+                />
+
                 <button onClick={() => setCounter(prev => prev + 1)}>+</button>
             </div>
 
-            <button className="article_button"> Add to cart</button>
+            <button className="article_button" onClick={() => setSelectedProducts(prev => ([
+                ...prev,
+                {
+                    id: id,
+                    amount: counter,
+                    variant_id:  variantRefs.current.filter(e => e.checked).map(e => e.name),
+                    colors: colorRefs.current.filter(e => e.checked).map(e => e.name)
+                }
+            ]))}>
+                Add to Cart
+            </button>
+
+
         </div>
     </article>
     )

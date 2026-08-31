@@ -8,7 +8,7 @@ const filterProducts = (category, setDisplayedProducts) => {
     setDisplayedProducts(products.filter(product => product.category == category))
 }
 
-const Home = () => {
+const Home = ({setSelectedProducts}) => {
     const [productCategories] = useState(["hair accessories", "hair care", "hair brushes"])
     const [displayedProducts, setDisplayedProducts] = useState([...products])
     const [categoryIndex, setCategoryIndex] = useState(0)
@@ -33,7 +33,7 @@ const Home = () => {
             </a>   
 
             <section className="cardsSection">
-                {displayedProducts.map(product => <Cards product={product} key={products.indexOf(product)}/> )}
+                {displayedProducts.map(product => <Cards setSelectedProducts={setSelectedProducts} product={product} key={products.indexOf(product)}/> )}
 
                 {!displayedProducts.length && (<span>No Product Available...</span>)}
             </section>

@@ -7,10 +7,10 @@ import THEME_ICON from '../assets/dark_theme.png'
 import Cart from './Cart'
 import { useState , useEffect } from "react";
 
-const Header = () => {
+const Header = ({selectedProducts}) => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const [darkMode, setDarkMode] = useState(mediaQuery);
-    const [displayCart, setDisplayCart] = useState(true)
+    const [displayCart, setDisplayCart] = useState(!true)
 
     useEffect(() => {
         document.documentElement.setAttribute(
@@ -50,7 +50,7 @@ const Header = () => {
 
             <img src={CART_ICON} alt="cart" height={50} className='cart_icon' onClick={() => setDisplayCart(true)}/>
 
-            {displayCart && (<Cart/>)}
+            {displayCart && (<Cart setDisplayCart={setDisplayCart} selectedProducts={selectedProducts}/>)}
         </header>
     )
 }

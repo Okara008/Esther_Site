@@ -5,7 +5,7 @@ const productImages = import.meta.glob(
     { eager: true, query: "?url", import: "default" }
 )
 
-const Cards = ({product}) => {
+const Cards = ({product, setSelectedProducts}) => {
     const image = productImages[`../assets/product_pics/${product.images[0]}`]
 
     return (
@@ -27,7 +27,17 @@ const Cards = ({product}) => {
                 
             }
 
-            <button>Add to Cart </button>
+            <button onClick={() => setSelectedProducts(prev => ([
+                ...prev,
+                {
+                    id: 1,
+                    amount: 6,
+                    variant_id: 2,
+                    colors: []
+                }
+            ]))}>
+                Add to Cart
+            </button>
         </Link>
     )
 }

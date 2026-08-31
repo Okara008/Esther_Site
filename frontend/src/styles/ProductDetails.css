@@ -133,19 +133,19 @@ article.productContainer .product_img img{
     text-decoration: underline;
 }
 
-.variant_details input[type = "radio"]{
+/* .variant_details input[type = "checkbox"]{
     display: none;
-}
+} */
 
-.variant_details input[type = "radio"]:checked + label{
+.variant_details input[type = "checkbox"]:checked + label{
     background-color: var(--primary);
     border-color: var(--primary);
     color: black;
     box-shadow: 1px 1px 10px var(--text) inset;
 }
-.variant_details input[type = "radio"]:checked + label:after{
+/* .variant_details input[type = "checkbox"]:checked + label:after{
     content: '---';
-}
+} */
 
 .article_color{
     display: flex;
