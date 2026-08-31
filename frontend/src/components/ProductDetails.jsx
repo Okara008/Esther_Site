@@ -26,10 +26,13 @@ const ProductDetails = () => {
     <article className="productContainer">
         <div  className="product_img">
             <img src={IMGS[imageCounter]} alt="Product Image"/>
-            <div className="img_nav">
-                <button style={{left: 0}} onClick={() => setImageCounter(prev => ((prev + 1) % IMGS.length))}>&lt;</button>
-                <button style={{right: 0}} onClick={() => setImageCounter(prev => ((prev - 1) > 0 ? (prev - 1) : (IMGS.length-1) ))}>&gt;</button>
-            </div>
+
+            {IMGS.length > 1 && (
+                <div className="img_nav">
+                    <button style={{left: 0}} onClick={() => setImageCounter(prev => ((prev + 1) % IMGS.length))}>&lt;</button>
+                    <button style={{right: 0}} onClick={() => setImageCounter(prev => ((prev - 1) > 0 ? (prev - 1) : (IMGS.length-1) ))}>&gt;</button>
+                </div>
+            )}
         </div>
         <div>
             <h3 className="article_name">{product.name}</h3>

@@ -29,10 +29,12 @@ article.productContainer .product_img{
 .product_img .img_nav button:hover{
     background-color: var(--muted-text);
     color: var(--inverted-text);
+    box-shadow: 0 0 10px var(--inverted-text);
 }
 
 .product_img .img_nav button:active{
-    transform: translateX(-.1px);
+    background-color: var(--primary);
+    opacity: .8;
 }
 
 article.productContainer .product_img img{

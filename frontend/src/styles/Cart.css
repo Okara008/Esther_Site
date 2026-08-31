@@ -1,0 +1,23 @@
+.outerShell{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+}
+
+.cartSection{
+    background-color: var(--bg);
+    height: 100%;
+    width: 90%;
+    float: right;
+    /* top: 0; */
+    /* right: 0; */
+    /* transform: translateX(-50%); */
+    width: 50%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}

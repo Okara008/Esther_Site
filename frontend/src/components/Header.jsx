@@ -4,11 +4,13 @@ import LOGO_ICON from '../assets/icon_black.png'
 import CART_ICON from '../assets/icons/shopping-cart.png'
 import SEARCH_ICON from '../assets/icons/search.png'
 import THEME_ICON from '../assets/dark_theme.png'
+import Cart from './Cart'
 import { useState , useEffect } from "react";
 
 const Header = () => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const [darkMode, setDarkMode] = useState(mediaQuery);
+    const [displayCart, setDisplayCart] = useState(true)
 
     useEffect(() => {
         document.documentElement.setAttribute(
@@ -45,7 +47,10 @@ const Header = () => {
                 onClick={toggleTheme}
                 title={`${darkMode ? "Dark Mode" : "Light Mode"}`} 
             />
-            <img src={CART_ICON} alt="cart" height={50} className='cart_icon'/>
+
+            <img src={CART_ICON} alt="cart" height={50} className='cart_icon' onClick={() => setDisplayCart(true)}/>
+
+            {displayCart && (<Cart/>)}
         </header>
     )
 }

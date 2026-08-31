@@ -1,4 +1,4 @@
-section .article{
+.cardsSection .article{
     background-color: var(--cards);
     padding: 1rem;
     border-radius: 2rem;
@@ -7,23 +7,23 @@ section .article{
     text-decoration: none;
 }
 
-section .article:hover{
+.cardsSection .article:hover{
     box-shadow: 0 0 10px var(--text);
 }
 
-section h2{
+.cardsSection h2{
     text-transform: capitalize;
     margin-bottom: 1rem;
 }
 
-section .product_img{
+.cardsSection .product_img{
     width: 15rem;
     height: 15rem;
     border: .5rem solid var(--primary);
     border-radius: 2rem;
 }
 
-section button{
+.cardsSection button{
     width: 100%;
     padding: .4rem;
     background-color: var(--primary);

@@ -11,12 +11,18 @@
 
 .product_category div{
     text-transform: capitalize;
+    cursor: pointer;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border: .2rem solid var(--primary);
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    opacity: .6;
 }
 
 .product_category .selected{
+    opacity: 1;
     font-weight: bold;
-    border-bottom: .2rem solid var(--primary);
+    background-color: var(--bg);
 }
 
 .whatsapp_icon{
@@ -28,7 +34,7 @@
 
 /* Product Display Section */
 
-section{
+.cardsSection{
     margin-block: 1rem;
     display: flex;
     flex-wrap: wrap;
