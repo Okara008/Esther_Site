@@ -10,19 +10,20 @@ import Header from './components/Header'
 import Home from './components/Home'
 import ProductDetails from './components/ProductDetails'
 import Footer from './components/Footer'
+import CartItemProvider from './components/CartContext'
 
 function App() {
-    const [selectedProducts, setSelectedProducts] = useState([])
-
     return (
-	<BrowserRouter>
-		<Header selectedProducts={selectedProducts}/>
-        <Routes>
-            <Route path='/' element={<Home/>}/>
-			<Route path='/product/:id' element={<ProductDetails setSelectedProducts={setSelectedProducts} />}/>
-        </Routes>
-        <Footer/>
-    </BrowserRouter>
+    <CartItemProvider>
+        <BrowserRouter>
+            <Header/>
+            <Routes>
+                <Route path='/' element={<Home/>}/>
+                <Route path='/product/:id' element={<ProductDetails />}/>
+            </Routes>
+            <Footer/>
+        </BrowserRouter>
+    </CartItemProvider>
     )
 }
 

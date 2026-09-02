@@ -10,7 +10,7 @@ import { useState , useEffect } from "react";
 const Header = ({selectedProducts}) => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const [darkMode, setDarkMode] = useState(mediaQuery);
-    const [displayCart, setDisplayCart] = useState(!true)
+    const [displayCart, setDisplayCart] = useState(true)
 
     useEffect(() => {
         document.documentElement.setAttribute(

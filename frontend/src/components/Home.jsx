@@ -2,17 +2,18 @@ import Cards from "./Cards"
 import products from "../../content.json"
 import WHATSAPP_ICON from '../assets/icons/whatsapp_colored.png'
 import { Link } from 'react-router';
-import {useState} from 'react';
+import {useState, useContext} from 'react';
+import { CartContext } from "./CartContext";
 
 const filterProducts = (category, setDisplayedProducts) => {
     setDisplayedProducts(products.filter(product => product.category == category))
 }
 
-const Home = ({setSelectedProducts}) => {
+const Home = () => {
     const [productCategories] = useState(["hair accessories", "hair care", "hair brushes"])
     const [displayedProducts, setDisplayedProducts] = useState([...products])
     const [categoryIndex, setCategoryIndex] = useState(0)
-
+    const {selectedProducts, setSelectedProducts} = useContext(CartContext)
     return(
         <main>
             <nav className="product_category">
@@ -27,7 +28,6 @@ const Home = ({setSelectedProducts}) => {
                     </div>
                 )}
             </nav>
-
             <a target="_blank" href="https://wa.me/2348100153987">
                 <img src={WHATSAPP_ICON} alt="Whatsapp Chat" title="Chat on Whatsapp" className="whatsapp_icon"/>
             </a>   

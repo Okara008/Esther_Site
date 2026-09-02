@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import products from "../../content.json"
+import { CartContext } from "./CartContext";
 
 const productImages = import.meta.glob(
     "../assets/product_pics/*",
@@ -8,7 +9,8 @@ const productImages = import.meta.glob(
 )
 
 
-const ProductDetails = ({setSelectedProducts}) => {
+const ProductDetails = () => {
+    const {selectedProducts, setSelectedProducts} = useContext(CartContext)
     const { id } = useParams()
     const [product] = useState(products[id])
     const [checkedVariant, setCheckedVariant] = useState(0)
@@ -41,7 +43,7 @@ const ProductDetails = ({setSelectedProducts}) => {
         <div>
             <h3 className="article_name">{product.name}</h3>
             <p className="article_category">-{product.category}-</p>
-
+                {selectedProducts}
 
             {product.colors?.length &&
                 <div className="article_color">
@@ -120,7 +122,7 @@ const ProductDetails = ({setSelectedProducts}) => {
                 {
                     id: id,
                     amount: counter,
-                    variant_id:  variantRefs.current.filter(e => e.checked).map(e => e.name),
+                    variant_id:  variantRefs.current.filter(e => e.checked).map(e => e.id),
                     colors: colorRefs.current.filter(e => e.checked).map(e => e.name)
                 }
             ]))}>
