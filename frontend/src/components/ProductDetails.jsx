@@ -8,6 +8,28 @@ const productImages = import.meta.glob(
     { eager: true, query: "?url", import: "default" }
 )
 
+const addToCart = (e, id, setSelectedProducts, amount, variant_id, colors) => {
+    e.preventDefault()
+    setSelectedProducts(prev => {
+        const copy = [...prev]
+        let index = copy.findIndex(product => product.id == id)
+
+        if (index !== -1) {
+            copy[index] = {...copy[index], amount: (copy[index].amount+1)}
+            return copy
+        }
+        else{
+            console.log(2);
+            copy.push({
+                id: id,
+                amount: amount,
+                variant_id: variant_id.current.filter(e => e.checked).map(e => e.id),
+                color: colors.current.filter(e => e.checked).map(e => e.name)
+            })
+            return copy
+        }
+    })
+}
 
 const ProductDetails = () => {
     const {selectedProducts, setSelectedProducts} = useContext(CartContext)
@@ -118,15 +140,7 @@ const ProductDetails = () => {
                 <button onClick={() => setCounter(prev => prev + 1)}>+</button>
             </div>
 
-            <button className="article_button" onClick={() => setSelectedProducts(prev => ([
-                ...prev,
-                {
-                    id: (id + 1),
-                    amount: counter,
-                    variant_id:  variantRefs.current.filter(e => e.checked).map(e => e.id),
-                    colors: colorRefs.current.filter(e => e.checked).map(e => e.name)
-                }
-            ]))}>
+            <button className="article_button" onClick={(e) => addToCart(e, (id+1), setSelectedProducts, counter, variantRefs, colorRefs)}>
                 Add to Cart
             </button>
 

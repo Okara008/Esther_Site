@@ -5,7 +5,7 @@ import { CartContext } from "./CartContext";
 const Cart = ({setDisplayCart}) => {
     const {selectedProducts, setSelectedProducts} = useContext(CartContext)
     const [ total, setTotal ] = useState(0)
-    const [subtotals, setSubtotals] = useState({})
+    const [ subtotals, setSubtotals] = useState({})
     
     // useEffect(() => {
     //     setSelectedProducts(prev => [...prev, 

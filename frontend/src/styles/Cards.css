@@ -31,4 +31,8 @@
     border: none;
     margin-top: 1rem;
     border-radius: 2rem;
+    cursor: pointer;
+}
+.cardsSection button:hover{
+    background-color: var(--primary-hover);
 }

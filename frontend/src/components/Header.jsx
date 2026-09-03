@@ -5,10 +5,12 @@ import CART_ICON from '../assets/icons/shopping-cart.png'
 import SEARCH_ICON from '../assets/icons/search.png'
 import THEME_ICON from '../assets/dark_theme.png'
 import Cart from './Cart'
-import { useState , useEffect } from "react";
+import { useState , useEffect, useContext } from "react";
+import { CartContext } from "./CartContext";
 
-const Header = ({selectedProducts}) => {
+const Header = () => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const {selectedProducts, setSelectedProducts} = useContext(CartContext)
     const [darkMode, setDarkMode] = useState(mediaQuery);
     const [displayCart, setDisplayCart] = useState(!true)
 
@@ -48,7 +50,10 @@ const Header = ({selectedProducts}) => {
                 title={`${darkMode ? "Dark Mode" : "Light Mode"}`} 
             />
 
-            <img src={CART_ICON} alt="cart" height={50} className='cart_icon' onClick={() => setDisplayCart(true)}/>
+            <div className="cartImgContainer" onClick={() => setDisplayCart(true)}>
+                <img src={CART_ICON} alt="cart" height={50} className='cart_icon'/>
+                <p>{selectedProducts.length}</p>
+            </div>
 
             {displayCart && (<Cart setDisplayCart={setDisplayCart} selectedProducts={selectedProducts}/>)}
         </header>

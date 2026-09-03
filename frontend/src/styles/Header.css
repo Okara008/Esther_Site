@@ -12,7 +12,7 @@ header{
 
 .search_container{
     background-color: var(--secondary);
-    height: 2rem;
+    height: 2.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -62,4 +62,24 @@ header{
 .cart_icon:hover{
     cursor: pointer;
     filter: drop-shadow(2px 0 10px white);
+}
+
+.cartImgContainer{
+    position: relative;
+    height: fit-content;
+}
+
+.cartImgContainer p{
+    position: absolute;
+    margin: 0;
+    font-size: 1.4rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
+    border-radius: 50%;
+    background-color: var(--primary);
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+    cursor: pointer;
 }

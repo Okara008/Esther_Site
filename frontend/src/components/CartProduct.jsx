@@ -35,7 +35,9 @@ const CartProduct = ({product, setSubtotals}) => {
                     <p className='cartItemName'><strong>{product_info.name}</strong> <small>- ₦{product_info.price}</small></p>
                     <p className="subTotal">SubTotal: <strong>₦{product_info.price * counter}</strong></p>
                 </div>
-                        <hr />
+
+                <hr />
+
                 <div className="cartItemBottom">
                     <div className="cartItemCounter">
                         <button onClick={() => setCounter(prev => {
@@ -64,8 +66,15 @@ const CartProduct = ({product, setSubtotals}) => {
                         />
                         <button onClick={() => setCounter(prev => prev + 1)}>+</button>
                     </div>
-                    <p className='cartItemVariant'> {product.variant_id.map(id => (id))} </p>
-                    <p>Colors: {product.colors.map((color, i) => (<small className='cartItemColor'> {color}{i < (product.colors.length-1) ? ',' : '.'}</small>))}</p>
+                    {/* <p className='cartItemVariant'> {product.variants.map(id => (id))} </p> */}
+                    {product.colors &&
+                        (<p>
+                            Colors: 
+                            {product.colors?.map((color, i) => (
+                                <small className='cartItemColor'> {color}{i < (product.colors.length-1) ? ',' : '.'}</small>
+                            ))}
+                        </p>)
+                    }
                 </div>
             </div>
         </div>

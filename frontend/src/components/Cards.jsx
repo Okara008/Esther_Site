@@ -1,11 +1,36 @@
 import { Link } from 'react-router';
+import { CartContext } from "./CartContext";
+import { useState, useContext, useEffect} from 'react';
 
 const productImages = import.meta.glob(
     "../assets/product_pics/*",
     { eager: true, query: "?url", import: "default" }
 )
 
-const Cards = ({product, setSelectedProducts}) => {
+const addToCart = (e, id, setSelectedProducts) => {
+    e.preventDefault()
+    setSelectedProducts(prev => {
+        const copy = [...prev]
+        let index = copy.findIndex(product => product.id == id)
+
+        if (index !== -1) {
+            copy[index] = {...copy[index], amount: (copy[index].amount+1)}
+            return copy
+        }
+        else{
+            copy.push({
+                id: id,
+                amount: 1,
+                variant_id: 0,
+                color: []
+            })
+            return copy
+        }
+    })
+}
+    
+const Cards = ({product}) => {
+    const {selectedProducts, setSelectedProducts} = useContext(CartContext)
     const image = productImages[`../assets/product_pics/${product.images[0]}`]
 
     return (
@@ -27,16 +52,8 @@ const Cards = ({product, setSelectedProducts}) => {
                 
             }
 
-            <button onClick={() => setSelectedProducts(prev => ([
-                ...prev,
-                {
-                    id: 1,
-                    amount: 6,
-                    variant_id: 2,
-                    colors: []
-                }
-            ]))}>
-                Add to Cart
+            <button onClick={(e) => addToCart(e, product.id, setSelectedProducts)}>
+                Add to Cart {product.variants[0]? `-${product.variants[0].name} type-`: ''}
             </button>
         </Link>
     )
