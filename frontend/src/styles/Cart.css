@@ -1,24 +1,80 @@
 .outerShell{
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    position: fixed;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    height: 100vh;
 }
 
 .cartSection{
     background-color: var(--bg);
     height: 100%;
-    width: 90%;
-    float: right;
-    /* top: 0; */
-    /* right: 0; */
-    /* transform: translateX(-50%); */
-    width: 50%;
+    /* float: right; */
+    /* width: 50%; */
+    padding-bottom: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    overflow: auto;
+}
+
+.cartItemsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
+    gap: 1.5rem;
+}
+
+.cartItem{
+    /* display: flex; */
+    /* align-items: center; */
+    background-color: var(--secondary);
+    color: var(--text);
+    border-radius: 1rem;
+    width: 30rem;
+    overflow-y: auto;
+    padding: .2rem 1rem;
+}
+
+.cartItemTop{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cartItemBottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: .8rem;
+}
+
+.cartItemName{
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.cartItemCounter input{
+    border: none;
+    background-color: var(--text);
+    width: 2rem;
+    text-align: center;
+    margin-inline: .6em;
+    color: var(--inverted-text);
+}
+
+.cartItemCounter button{
+    width: 1rem;
+    background-color: var(--text);
+    border: none;
+    color: var(--inverted-text);
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cartItemCounter button:hover{
+    background-color: var(--primary-hover);
+    cursor: pointer;
 }

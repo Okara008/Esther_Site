@@ -4,6 +4,7 @@ import { CartContext } from "./CartContext";
 
 const Cart = ({setDisplayCart}) => {
     const {selectedProducts, setSelectedProducts} = useContext(CartContext)
+    const [ total, setTotal ] = useState(0)
 
     useEffect(() => {
         setSelectedProducts(prev => [...prev, 
@@ -18,9 +19,24 @@ const Cart = ({setDisplayCart}) => {
                 amount: 10,
                 variant_id:  [],
                 colors: ["green", "blue", "grey", "black"]
+            },
+            {
+                id: 16,
+                amount: 3,
+                variant_id:  [],
+                colors: ["lemon", "red", "black"]
             }
     ])
     }, [])
+
+    // useEffect(() => {
+    //     let total = 0
+    //     for (let i = 0; i < selectedProducts.length; i++) {
+    //         const amount = Number(selectedProducts[i].amount);
+    //         total += amount
+    //     }
+    //     setTotal(total)
+    // }, [selectedProducts])
 
     return(
         <div className="outerShell">
@@ -28,10 +44,15 @@ const Cart = ({setDisplayCart}) => {
             <section className="cartSection">
                 <h3>{selectedProducts.length} Items Selected</h3>
 
-                {Boolean(selectedProducts.length) && 
-                    selectedProducts.map(product => <CartProduct product={product} />)
-                }
+                {Boolean(selectedProducts.length) && (
+                    <section className="cartItemsContainer">{selectedProducts.map(product => <CartProduct product={product} setTotal={setTotal} />)}</section>
+                )}
+
+                <section className="totalSection">
+                    Total: ₦{total}
+                </section>
             </section>
+
         </div>
     )
 }

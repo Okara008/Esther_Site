@@ -43,7 +43,6 @@ const ProductDetails = () => {
         <div>
             <h3 className="article_name">{product.name}</h3>
             <p className="article_category">-{product.category}-</p>
-                {selectedProducts}
 
             {product.colors?.length &&
                 <div className="article_color">
