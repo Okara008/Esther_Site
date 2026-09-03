@@ -5,7 +5,7 @@ const productImages = import.meta.glob(
     { eager: true, query: "?url", import: "default" }
 )
 
-const CartProduct = ({product, setTotal}) => {
+const CartProduct = ({product, setSubtotals}) => {
     const [product_info, set_product_info] = useState(product_details.filter(p => p.id == product.id)[0])
     const [IMGS, set_IMGS] = useState([])
     const [counter, setCounter] = useState(product.amount)
@@ -16,49 +16,58 @@ const CartProduct = ({product, setTotal}) => {
             image = productImages[`../assets/product_pics/${image}`];
             set_IMGS(prev => ([...prev, image]))
         }
-        setTotal(prev => prev + (product_info.price * product.amount))
     }, [])
     
+    useEffect(() => {
+        setSubtotals(prev => ({
+            ...prev,
+            [product.id]: product_info.price * counter
+        }))
+
+    }, [counter])
 
     return (
         <div key={product.id} className='cartItem'>
-            <div className="cartItemTop">
-                <p className='cartItemName'>{product_info.name}</p>
-                <p className="subTotal">SubTotal: {product_info.price * counter}</p>
-            </div>
+            <div className="cartItemImg"><img src={IMGS[0]} alt="" /></div>
 
-            <div className="cartItemBottom">
-                <div className="cartItemCounter">
-                    <button onClick={() => setCounter(prev => {
-                        let copy = prev
-                        if (copy <= 1) return copy
-                        return copy - 1
-                    })}>-</button>
-                    <input type="text" value={counter} inputMode="numeric"
-                        onChange={(e) =>
-                            setCounter(prev => {
-                                const num = Number(e.target.value)
-                                if(isNaN(num)){
-                                    return prev
-                                }
-                                return num
-                            })
-                        }
-                        onBlur={(e) => setCounter(prev => {
-                                const num = Number(e.target.value)
-                                if(num < 1){
-                                    return 1
-                                }
-                            })
-                        }
-                    />
-                    <button onClick={() => setCounter(prev => prev + 1)}>+</button>
+            <div>
+                <div className="cartItemTop">
+                    <p className='cartItemName'><strong>{product_info.name}</strong> <small>- ₦{product_info.price}</small></p>
+                    <p className="subTotal">SubTotal: <strong>₦{product_info.price * counter}</strong></p>
                 </div>
-
-                <p className='cartItemVariant'> {product.variant_id.map(id => (id))} </p>
-                <p>Colors: {product.colors.map((color, i) => (<small className='cartItemColor'> {color}{i < (product.colors.length-1) ? ',' : '.'}</small>))}</p>
+                        <hr />
+                <div className="cartItemBottom">
+                    <div className="cartItemCounter">
+                        <button onClick={() => setCounter(prev => {
+                            let copy = prev
+                            if (copy <= 1) return copy
+                            return copy - 1
+                        })}>-</button>
+                        <input type="text" value={counter} inputMode="numeric"
+                            onChange={(e) =>
+                                setCounter(prev => {
+                                    const num = Number(e.target.value)
+                                    if(isNaN(num)){
+                                        return prev
+                                    }
+                                    return num
+                                })
+                            }
+                            onBlur={(e) => setCounter(prev => {
+                                    const num = Number(e.target.value)
+                                    if(num < 1){
+                                        return 1
+                                    }
+                                    return num
+                                })
+                            }
+                        />
+                        <button onClick={() => setCounter(prev => prev + 1)}>+</button>
+                    </div>
+                    <p className='cartItemVariant'> {product.variant_id.map(id => (id))} </p>
+                    <p>Colors: {product.colors.map((color, i) => (<small className='cartItemColor'> {color}{i < (product.colors.length-1) ? ',' : '.'}</small>))}</p>
+                </div>
             </div>
-
         </div>
     )
 }

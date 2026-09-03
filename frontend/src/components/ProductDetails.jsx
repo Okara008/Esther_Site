@@ -11,7 +11,8 @@ const productImages = import.meta.glob(
 
 const ProductDetails = () => {
     const {selectedProducts, setSelectedProducts} = useContext(CartContext)
-    const { id } = useParams()
+    let { id } = useParams()
+    id = Number(id)
     const [product] = useState(products[id])
     const [checkedVariant, setCheckedVariant] = useState(0)
     const [imageCounter, setImageCounter] = useState(0)
@@ -109,6 +110,7 @@ const ProductDetails = () => {
                             if(num < 1){
                                 return 1
                             }
+                            return num
                         })
                     }
                 />
@@ -119,7 +121,7 @@ const ProductDetails = () => {
             <button className="article_button" onClick={() => setSelectedProducts(prev => ([
                 ...prev,
                 {
-                    id: id,
+                    id: (id + 1),
                     amount: counter,
                     variant_id:  variantRefs.current.filter(e => e.checked).map(e => e.id),
                     colors: colorRefs.current.filter(e => e.checked).map(e => e.name)
