@@ -8,7 +8,9 @@ const productImages = import.meta.glob(
 const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
     const [product_info, set_product_info] = useState(product_details.filter(p => p.id == product.id)[0])
     const [IMGS, set_IMGS] = useState([])
-    const [counter, setCounter] = useState(product.variant[0].amount)
+    const [counter, setCounter] = useState(product.variant.amount)
+
+    const price = product_info?.price ?? product_info?.variants?.[product.variant.id]?.price
 
     useEffect(() => {
         for (let i = 0; i < product_info.images.length; i++) {
@@ -21,7 +23,7 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
     useEffect(() => {
         setSubtotals(prev => ({
             ...prev,
-            [product.id]: product_info.price * counter
+            [product.id]: (price) * counter
         }))
 
         setSelectedProducts(prev => {
@@ -29,12 +31,10 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
             let index = copy.findIndex(e => e.id == product.id)
             copy[index] = {
                 ...copy[index],
-                variant: copy[index].variant.map((v, i) =>
-                    v.id == copy[index].variant[0].id
-                        ? { ...v, amount: counter }
-                        : v
-
-                )
+                variant: {
+                    ...copy[index].variant,
+                    amount: counter
+                }
             }
             return copy
         })
@@ -46,8 +46,9 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
 
             <div>
                 <div className="cartItemTop">
-                    <p className='cartItemName'><strong>{product_info.name}</strong> <small>- ₦{product_info.price}</small></p>
-                    <p className="subTotal">SubTotal: <strong>₦{product_info.price * counter}</strong></p>
+                    <p className='cartItemName'><strong>{product_info.name}</strong> <small>-{product_info?.variants?.[product.variant.id]?.name} </small> <small>- ₦{price}</small></p>
+                    {<p></p>}
+                    <p className="subTotal">SubTotal: <strong>₦ {(price) * counter} </strong></p>
                 </div>
 
                 <hr />
@@ -80,7 +81,7 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
                         />
                         <button onClick={() => setCounter(prev => prev + 1)}>+</button>
                     </div>
-                    {/* <p className='cartItemVariant'> {product.variants.map(id => (id))} </p> */}
+
                     {product.colors &&
                         (<p>
                             Colors: 

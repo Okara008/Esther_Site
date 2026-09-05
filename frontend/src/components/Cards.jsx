@@ -20,7 +20,7 @@ const addToCart = (e, currentId, setSelectedProducts, currentVariantId) => {
         for (let i = 0; i < copy_indexes.length; i++) {
             const index = copy_indexes[i];
 
-            if (copy[index]?.variant.some( variant => variant.id == currentVariantId )) {
+            if ( copy[index]?.variant.id == currentVariantId ) {
                 foundIndex = index
                 break
             }            
@@ -29,11 +29,10 @@ const addToCart = (e, currentId, setSelectedProducts, currentVariantId) => {
         if (foundIndex !== -1) {
             copy[foundIndex] = {
                 ...copy[foundIndex],
-                variant: copy[foundIndex].variant.map((v, i) =>
-                    v.id === currentVariantId
-                        ? { ...v, amount: v.amount + 1 }
-                        : v
-                )
+                variant: {
+                    ...copy[foundIndex].variant,
+                    amount: (copy[foundIndex].variant.amount + 1)
+                }
             }
             return copy
         }
@@ -41,10 +40,10 @@ const addToCart = (e, currentId, setSelectedProducts, currentVariantId) => {
         else{
             copy.push({
                 id: currentId,
-                variant: [{
+                variant: {
                     id: currentVariantId,
                     amount: 1
-                }],
+                },
                 color: []
             })
             return copy
