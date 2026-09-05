@@ -8,7 +8,7 @@ const productImages = import.meta.glob(
 const CartProduct = ({product, setSubtotals}) => {
     const [product_info, set_product_info] = useState(product_details.filter(p => p.id == product.id)[0])
     const [IMGS, set_IMGS] = useState([])
-    const [counter, setCounter] = useState(product.amount)
+    const [counter, setCounter] = useState(product.variant[0].amount)
 
     useEffect(() => {
         for (let i = 0; i < product_info.images.length; i++) {

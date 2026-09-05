@@ -8,26 +8,37 @@ const productImages = import.meta.glob(
     { eager: true, query: "?url", import: "default" }
 )
 
-const addToCart = (e, id, setSelectedProducts, amount, variant_id, colors) => {
+const addToCart = (e, currentId, setSelectedProducts, amount, currentVariantIds, colors) => {
     e.preventDefault()
     setSelectedProducts(prev => {
         const copy = [...prev]
-        let index = copy.findIndex(product => product.id == id)
+        let index = copy.findIndex(product => product.id == currentId)
+        console.log(currentVariantIds);
+        // if (index !== -1) {
+        //     copy[index] = {...copy[index], amount: (copy[index].amount+1)}
+        //     return copy
+        // }
+        // else{
+        //     copy.push({
+        //         id: currentId,
+        //         variant: [{
+        //             id: currentVariantIds.current.filter(e => e.checked).map(e => e.id),
+        //             amount: amount
+        //         }],
+        //         color: colors.current.filter(e => e.checked).map(e => e.name)
+        //     })
+        //     return copy
+        // }
 
-        if (index !== -1) {
-            copy[index] = {...copy[index], amount: (copy[index].amount+1)}
-            return copy
-        }
-        else{
-            console.log(2);
-            copy.push({
-                id: id,
-                amount: amount,
-                variant_id: variant_id.current.filter(e => e.checked).map(e => e.id),
-                color: colors.current.filter(e => e.checked).map(e => e.name)
-            })
-            return copy
-        }
+        // else{
+        //     copy.push({
+        //         id: id,
+        //         amount: amount,
+        //         variant_id: variant_id.current.filter(e => e.checked).map(e => e.id),
+        //         color: colors.current.filter(e => e.checked).map(e => e.name)
+        //     })
+        return copy
+        // }
     })
 }
 

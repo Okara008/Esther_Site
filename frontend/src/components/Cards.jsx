@@ -7,21 +7,44 @@ const productImages = import.meta.glob(
     { eager: true, query: "?url", import: "default" }
 )
 
-const addToCart = (e, id, setSelectedProducts) => {
+const addToCart = (e, currentId, setSelectedProducts, currentVariantId) => {
     e.preventDefault()
     setSelectedProducts(prev => {
         const copy = [...prev]
-        let index = copy.findIndex(product => product.id == id)
+        let foundIndex = -1
+        let copy_indexes = copy
+            .map((product, index) => product.id == currentId ? index : -1)
+            .filter(index => index !== -1)
+        
 
-        if (index !== -1) {
-            copy[index] = {...copy[index], amount: (copy[index].amount+1)}
+        for (let i = 0; i < copy_indexes.length; i++) {
+            const index = copy_indexes[i];
+
+            if (copy[index]?.variant.some( variant => variant.id == currentVariantId )) {
+                foundIndex = index
+                break
+            }            
+        }
+
+        if (foundIndex !== -1) {
+            copy[foundIndex] = {
+                ...copy[foundIndex],
+                variant: copy[foundIndex].variant.map((v, i) =>
+                    v.id === currentVariantId
+                        ? { ...v, amount: v.amount + 1 }
+                        : v
+                )
+            }
             return copy
         }
+        
         else{
             copy.push({
-                id: id,
-                amount: 1,
-                variant_id: 0,
+                id: currentId,
+                variant: [{
+                    id: currentVariantId,
+                    amount: 1
+                }],
                 color: []
             })
             return copy
@@ -31,29 +54,30 @@ const addToCart = (e, id, setSelectedProducts) => {
     
 const Cards = ({product}) => {
     const {selectedProducts, setSelectedProducts} = useContext(CartContext)
+    const [ selectedVariant, setSelectedVariant ] = useState(0)
     const image = productImages[`../assets/product_pics/${product.images[0]}`]
 
     return (
-        <Link className='article' to={`/product/${product.id-1}`} >
+        <Link className='individual_card' to={`/product/${product.id-1}`} >
             <img src={image} alt="product images" height={100} className="product_img"/>
             <h2>{product.name}</h2>
 
             {
                 product.variants.length ? 
-                <div>
-                    {product.variants.map(p => (
-                        <div>
-                            <span style={{textTransform: 'capitalize'}}>{p.name}</span>: ₦{p.price} per {product.unit}
-                        </div>
+                <select onClick={(e)=> e.preventDefault()} name='selectedVariant' onChange={(e) => setSelectedVariant(e.target.value)}>
+                    {product.variants.map((p, index) => (
+                        <option value={index}>
+                            {p.name}: ₦{p.price} per {product.unit}
+                        </option>
                     ))}
-                </div>
+                </select>
                 :
                 <span>₦{product.price} per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</span>
                 
             }
 
-            <button onClick={(e) => addToCart(e, product.id, setSelectedProducts)}>
-                Add to Cart {product.variants[0]? `-${product.variants[0].name} type-`: ''}
+            <button onClick={(e) => addToCart(e, product.id, setSelectedProducts, selectedVariant)}>
+                Add to Cart
             </button>
         </Link>
     )
