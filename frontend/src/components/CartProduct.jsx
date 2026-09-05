@@ -5,7 +5,7 @@ const productImages = import.meta.glob(
     { eager: true, query: "?url", import: "default" }
 )
 
-const CartProduct = ({product, setSubtotals}) => {
+const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
     const [product_info, set_product_info] = useState(product_details.filter(p => p.id == product.id)[0])
     const [IMGS, set_IMGS] = useState([])
     const [counter, setCounter] = useState(product.variant[0].amount)
@@ -24,6 +24,20 @@ const CartProduct = ({product, setSubtotals}) => {
             [product.id]: product_info.price * counter
         }))
 
+        setSelectedProducts(prev => {
+            let copy = [...prev]
+            let index = copy.findIndex(e => e.id == product.id)
+            copy[index] = {
+                ...copy[index],
+                variant: copy[index].variant.map((v, i) =>
+                    v.id == copy[index].variant[0].id
+                        ? { ...v, amount: counter }
+                        : v
+
+                )
+            }
+            return copy
+        })
     }, [counter])
 
     return (

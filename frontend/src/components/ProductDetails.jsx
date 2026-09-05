@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useState, useRef, useContext, useEffect } from 'react';
+import { useState, useRef, useContext, Fragment } from 'react';
 import products from "../../content.json"
 import { CartContext } from "./CartContext";
 
@@ -8,37 +8,39 @@ const productImages = import.meta.glob(
     { eager: true, query: "?url", import: "default" }
 )
 
-const addToCart = (e, currentId, setSelectedProducts, amount, currentVariantIds, colors) => {
+const addToCart = (e, currentId, setSelectedProducts, amount, currentVariantId, colors) => {
     e.preventDefault()
     setSelectedProducts(prev => {
         const copy = [...prev]
         let index = copy.findIndex(product => product.id == currentId)
-        console.log(currentVariantIds);
-        // if (index !== -1) {
-        //     copy[index] = {...copy[index], amount: (copy[index].amount+1)}
-        //     return copy
-        // }
-        // else{
-        //     copy.push({
-        //         id: currentId,
-        //         variant: [{
-        //             id: currentVariantIds.current.filter(e => e.checked).map(e => e.id),
-        //             amount: amount
-        //         }],
-        //         color: colors.current.filter(e => e.checked).map(e => e.name)
-        //     })
-        //     return copy
-        // }
 
-        // else{
-        //     copy.push({
-        //         id: id,
-        //         amount: amount,
-        //         variant_id: variant_id.current.filter(e => e.checked).map(e => e.id),
-        //         color: colors.current.filter(e => e.checked).map(e => e.name)
-        //     })
-        return copy
-        // }
+        if (index !== -1) {
+            const variantIndex = copy[index].variant.findIndex(
+                variant => variant.id == currentVariantId
+            )
+            if (variantIndex !== -1) {
+                copy[index] = {
+                    ...copy[index],
+                    variant: copy[index].variant.map((variant, i) =>
+                        i === variantIndex ?
+                            { ...variant, amount: variant.amount + amount }
+                            : variant
+                )}
+            }
+            return copy
+        }
+        else{
+            copy.push({
+                id: currentId,
+                variant: [{
+                    id: currentVariantId.current.filter(e => e.checked).map(e => e.id),
+                    amount: amount
+                }],
+                color: colors.current.filter(e => e.checked).map(e => e.name)
+            })
+            return copy
+        }
+
     })
 }
 
@@ -69,7 +71,7 @@ const ProductDetails = () => {
             {IMGS.length > 1 && (
                 <div className="img_nav">
                     <button style={{left: 0}} onClick={() => setImageCounter(prev => ((prev + 1) % IMGS.length))}>&lt;</button>
-                    <button style={{right: 0}} onClick={() => setImageCounter(prev => ((prev - 1) > 0 ? (prev - 1) : (IMGS.length-1) ))}>&gt;</button>
+                    <button style={{right: 0}} onClick={() => setImageCounter(prev => ((prev > 0) ? (prev - 1) : (IMGS.length-1) ))}>&gt;</button>
                 </div>
             )}
         </div>
@@ -82,7 +84,7 @@ const ProductDetails = () => {
                 <div className="article_color">
                     {product.colors.map((color, index) => (
                         <div key={index}>
-                            <input type="checkbox" id={product.colors.indexOf(color)} name={color}
+                            <input type="radio" id={product.colors.indexOf(color)} name={color}
                                 ref={el => colorRefs.current[index] = el}
                             />
                             <label htmlFor={product.colors.indexOf(color)}>{color}</label>
@@ -91,20 +93,20 @@ const ProductDetails = () => {
                 </div>
             }
 
-            {product.variants.length ?
+            {product.variants?.length ?
                 <>
                     <div className="variant_details">
                     {product.variants.map((variant, index) => (
-                        <>  
-                            <input type="checkbox" name={variant.name} variantRefs={el => variantRefs.current[index] = el} id={product.variants.indexOf(variant)} onClick={() => setCheckedVariant(product.variants.indexOf(variant))}/>
+                        <Fragment key={variant.id}>  
+                            <input type="radio" name={variant.name} ref={el => variantRefs.current[index] = el} id={product.variants.indexOf(variant)} onClick={() => setCheckedVariant(product.variants.indexOf(variant))}/>
                             <label htmlFor={product.variants.indexOf(variant)} >
                                 <h4 className="variant_name">{variant.name}</h4>
                                 <p className="variant_price">₦<b>{variant.price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
                                 {Boolean(variant.others.length)  && 
-                                    variant.others.map(prop => (<div> <strong>{prop.name}</strong>: <span>{prop.value}</span></div>))
+                                    variant.others.map((prop, index) => (<div key={index}> <strong>{prop.name}</strong>: <span>{prop.value}</span></div>))
                                 }
                             </label>
-                        </>
+                        </Fragment>
                     ))}
                     </div>
                     <p> Total: <strong>₦{product.variants[checkedVariant]?.price * counter}</strong></p>
@@ -114,7 +116,7 @@ const ProductDetails = () => {
                 
                 <>
                     <p className="article_price">₦<b>{product.price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
-                    {Boolean(product.others.length)  && 
+                    {Boolean(product.others?.length)  && 
                         product.others.map(prop => (<> <span>{prop.name}</span>: <span>{prop.value}</span></>))
                     }
                     <p> Total: <strong>₦{product.price * counter}</strong></p>

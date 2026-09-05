@@ -133,7 +133,7 @@ article.productContainer .product_img img{
     text-decoration: underline;
 }
 
-.variant_details input[type = "checkbox"]:checked + label{
+.variant_details input[type = "radio"]:checked + label{
     background-color: var(--primary);
     border-color: var(--primary);
     color: black;

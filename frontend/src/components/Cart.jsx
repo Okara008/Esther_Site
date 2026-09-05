@@ -7,29 +7,6 @@ const Cart = ({setDisplayCart}) => {
     const [ total, setTotal ] = useState(0)
     const [ subtotals, setSubtotals] = useState({})
     
-    // useEffect(() => {
-    //     setSelectedProducts(prev => [...prev, 
-    //         {
-    //             id: 2,
-    //             amount: 6,
-    //             variant_id:  [],
-    //             colors: ["red", "blue", "pink"]
-    //         },
-    //         {
-    //             id: 9,
-    //             amount: 10,
-    //             variant_id:  [],
-    //             colors: ["green", "blue", "grey", "black"]
-    //         },
-    //         {
-    //             id: 16,
-    //             amount: 3,
-    //             variant_id:  [],
-    //             colors: ["lemon", "red", "black"]
-    //         }
-    // ])
-    // }, [])
-
     useEffect(() => {
         const total = Object.values(subtotals).reduce(
             (sum, subtotal) => sum + subtotal,
@@ -45,7 +22,7 @@ const Cart = ({setDisplayCart}) => {
                 <h3>{selectedProducts.length} Items Selected</h3>
                 <div className="notTotalSection">
                     {Boolean(selectedProducts.length) && (
-                        <section className="cartItemsContainer">{selectedProducts.map(product => <CartProduct product={product} setSubtotals={setSubtotals} />)}</section>
+                        <section className="cartItemsContainer">{selectedProducts.map(product => <CartProduct product={product} setSelectedProducts={setSelectedProducts} setSubtotals={setSubtotals} />)}</section>
                     )}
                 </div>
 
