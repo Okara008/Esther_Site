@@ -1,7 +1,6 @@
 import Cards from "./Cards"
 import products from "../../content.json"
 import WHATSAPP_ICON from '../assets/icons/whatsapp_colored.png'
-import { Link } from 'react-router';
 import {useState, useContext} from 'react';
 import { CartContext } from "./CartContext";
 
@@ -19,10 +18,11 @@ const Home = () => {
             <nav className="product_category">
                 <div className={`${!categoryIndex && 'selected'}`} onClick={() => {setDisplayedProducts([...products]); setCategoryIndex(0)}}>All</div>
                 
-                {productCategories.map(category => 
+                {productCategories.map((category, index) => 
                     <div 
                         className={`${categoryIndex == (productCategories.indexOf(category)+1) && 'selected'}`} 
                         onClick={() => {filterProducts(category, setDisplayedProducts); setCategoryIndex(productCategories.indexOf(category)+1)}}
+                        key={index}
                     >   
                         {category}  
                     </div>

@@ -46,9 +46,9 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
 
             <div>
                 <div className="cartItemTop">
-                    <p className='cartItemName'><strong>{product_info.name}</strong> <small>-{product_info?.variants?.[product.variant.id]?.name} </small> <small>- ₦{price}</small></p>
+                    <p className='cartItemName'><strong>{product_info.name}</strong> <small className='cartItemVariant'>{product_info?.variants?.[product.variant.id]?.name} </small> <small>- ₦{price}</small></p>
                     {<p></p>}
-                    <p className="subTotal">SubTotal: <strong>₦ {(price) * counter} </strong></p>
+                    <p className="subTotal">SubTotal: <strong>₦{(price) * counter} </strong></p>
                 </div>
 
                 <hr />
@@ -60,6 +60,7 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
                             if (copy <= 1) return copy
                             return copy - 1
                         })}>-</button>
+
                         <input type="text" value={counter} inputMode="numeric"
                             onChange={(e) =>
                                 setCounter(prev => {
@@ -79,12 +80,13 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
                                 })
                             }
                         />
+
                         <button onClick={() => setCounter(prev => prev + 1)}>+</button>
                     </div>
 
-                    {product.colors &&
+                    {Boolean(product.colors.length) &&
                         (<p>
-                            Colors: 
+                            <strong>Colors: </strong>
                             {product.colors?.map((color, i) => (
                                 <small className='cartItemColor'> {color}{i < (product.colors.length-1) ? ',' : '.'}</small>
                             ))}

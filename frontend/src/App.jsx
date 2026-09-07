@@ -11,7 +11,7 @@ import Home from './components/Home'
 import ProductDetails from './components/ProductDetails'
 import Footer from './components/Footer'
 import CartItemProvider from './components/CartContext'
-
+import NotFound from './components/NotFound';
 function App() {
     return (
     <CartItemProvider>
@@ -20,6 +20,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Home/>}/>
                 <Route path='/product/:id' element={<ProductDetails />}/>
+                <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer/>
         </BrowserRouter>

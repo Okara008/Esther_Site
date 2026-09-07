@@ -23,7 +23,7 @@
     border-radius: 2rem;
 }
 
-.cardsSection button{
+.individual_card button{
     width: 100%;
     padding: .4rem;
     background-color: var(--primary);
@@ -33,7 +33,8 @@
     border-radius: 2rem;
     cursor: pointer;
 }
-.cardsSection button:hover{
+.individual_card button:hover
+{
     background-color: var(--primary-hover);
     box-shadow: 0 0 10px var(--primary);
 }

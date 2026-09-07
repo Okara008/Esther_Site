@@ -7,8 +7,9 @@ const productImages = import.meta.glob(
     { eager: true, query: "?url", import: "default" }
 )
 
-const addToCart = (e, currentId, setSelectedProducts, currentVariantId) => {
+const addToCart = (e, currentId, setSelectedProducts, currentVariantId, setAddedConfirmed) => {
     e.preventDefault()
+    
     setSelectedProducts(prev => {
         const copy = [...prev]
         let foundIndex = -1
@@ -44,17 +45,20 @@ const addToCart = (e, currentId, setSelectedProducts, currentVariantId) => {
                     id: currentVariantId,
                     amount: 1
                 },
-                color: []
+                colors: []
             })
             return copy
         }
     })
+    setAddedConfirmed(true)
+    setTimeout(() => setAddedConfirmed(false), 3000)
 }
     
 const Cards = ({product}) => {
     const {selectedProducts, setSelectedProducts} = useContext(CartContext)
     const [ selectedVariant, setSelectedVariant ] = useState(0)
     const image = productImages[`../assets/product_pics/${product.images[0]}`]
+    const [ addedConfirmed, setAddedConfirmed ] = useState(false)
 
     return (
         <Link className='individual_card' to={`/product/${product.id-1}`} >
@@ -65,7 +69,7 @@ const Cards = ({product}) => {
                 product.variants.length ? 
                 <select onClick={(e)=> e.preventDefault()} name='selectedVariant' onChange={(e) => setSelectedVariant(e.target.value)}>
                     {product.variants.map((p, index) => (
-                        <option value={index}>
+                        <option value={index} key={index}>
                             {p.name}: ₦{p.price} per {product.unit}
                         </option>
                     ))}
@@ -75,9 +79,19 @@ const Cards = ({product}) => {
                 
             }
 
-            <button onClick={(e) => addToCart(e, product.id, setSelectedProducts, selectedVariant)}>
-                Add to Cart
-            </button>
+            {!addedConfirmed && (
+                <button 
+                    onClick={(e) => addToCart(e, product.id, setSelectedProducts, selectedVariant, setAddedConfirmed)}
+                >
+                    Add to cart
+                </button>
+            )}
+
+            {addedConfirmed && (
+                <button disabled={true} style={{backgroundColor: "green"}}>
+                    Added ...
+                </button>
+            )}
         </Link>
     )
 }

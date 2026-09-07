@@ -1,9 +1,10 @@
 import { Link } from 'react-router';
 
-import LOGO_ICON from '../assets/icon_black.png'
+import LOGO_ICON from '../assets/icons/icon_black.png'
 import CART_ICON from '../assets/icons/shopping-cart.png'
 import SEARCH_ICON from '../assets/icons/search.png'
-import THEME_ICON from '../assets/dark_theme.png'
+import DARK_ICON from '../assets/icons/dark-mode.png'
+import LIGHT_ICON from '../assets/icons/light-mode.png'
 import Cart from './Cart'
 import { useState , useEffect, useContext } from "react";
 import { CartContext } from "./CartContext";
@@ -44,7 +45,7 @@ const Header = () => {
             </div>
 
             <img 
-                src={THEME_ICON} alt="icon" height={50} 
+                src={darkMode ? DARK_ICON : LIGHT_ICON} alt="icon" height={50} 
                 className={`${darkMode ? "togggle_theme" : ""} theme_icon`} 
                 onClick={toggleTheme}
                 title={`${darkMode ? "Dark Mode" : "Light Mode"}`} 

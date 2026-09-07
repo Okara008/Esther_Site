@@ -8,36 +8,49 @@ const productImages = import.meta.glob(
     { eager: true, query: "?url", import: "default" }
 )
 
-const addToCart = (e, currentId, setSelectedProducts, amount, currentVariantId, colors) => {
+const addToCart = (e, currentId, setSelectedProducts, amount, currentVariantId, colors, setAddedConfirmed) => {
     e.preventDefault()
+    console.log(amount);
     setSelectedProducts(prev => {
         const copy = [...prev]
-        let index = copy.findIndex(product => product.id == currentId)
+        let foundIndex = -1
+        let copy_indexes = copy
+            .map((product, index) => product.id == currentId ? index : -1)
+            .filter(index => index !== -1)
 
-        if (index !== -1) {
-            const variantIndex = copy[index].variant.findIndex(
-                variant => variant.id == currentVariantId
-            )
-            if (variantIndex !== -1) {
-                copy[index] = {
-                    ...copy[index],
-                    variant: copy[index].variant.map((variant, i) =>
-                        i === variantIndex ?
-                            { ...variant, amount: variant.amount + amount }
-                            : variant
-                )}
+        for (let i = 0; i < copy_indexes.length; i++) {
+            const index = copy_indexes[i];
+
+            if ( copy[index]?.variant.id == currentVariantId ) {
+                foundIndex = index
+                break
+            }            
+        }
+    
+        if (foundIndex !== -1) {
+            copy[foundIndex] = {
+                ...copy[foundIndex],
+                variant: {
+                    ...copy[foundIndex].variant,
+                    amount: amount
+                },
+                colors: colors.current.filter(e => e.checked).map(e => e.name)
             }
+            setAddedConfirmed(true)
+            setTimeout(() => setAddedConfirmed(false), 3000)
             return copy
         }
         else{
             copy.push({
                 id: currentId,
-                variant: [{
-                    id: currentVariantId.current.filter(e => e.checked).map(e => e.id),
+                variant: {
+                    id: currentVariantId,
                     amount: amount
-                }],
-                color: colors.current.filter(e => e.checked).map(e => e.name)
+                },
+                colors: colors.current.filter(e => e.checked).map(e => e.name)
             })
+            setAddedConfirmed(true)
+            setTimeout(() => setAddedConfirmed(false), 3000)
             return copy
         }
 
@@ -51,8 +64,8 @@ const ProductDetails = () => {
     const [product] = useState(products[id])
     const [checkedVariant, setCheckedVariant] = useState(0)
     const [imageCounter, setImageCounter] = useState(0)
+    const [ addedConfirmed, setAddedConfirmed ] = useState(false)
     const colorRefs = useRef([])
-    const variantRefs = useRef([])
     let IMGS = []
     
     const [counter, setCounter] = useState(1)
@@ -84,7 +97,7 @@ const ProductDetails = () => {
                 <div className="article_color">
                     {product.colors.map((color, index) => (
                         <div key={index}>
-                            <input type="radio" id={product.colors.indexOf(color)} name={color}
+                            <input type="checkbox" id={product.colors.indexOf(color)} name={color}
                                 ref={el => colorRefs.current[index] = el}
                             />
                             <label htmlFor={product.colors.indexOf(color)}>{color}</label>
@@ -98,8 +111,8 @@ const ProductDetails = () => {
                     <div className="variant_details">
                     {product.variants.map((variant, index) => (
                         <Fragment key={variant.id}>  
-                            <input type="radio" name={variant.name} ref={el => variantRefs.current[index] = el} id={product.variants.indexOf(variant)} onClick={() => setCheckedVariant(product.variants.indexOf(variant))}/>
-                            <label htmlFor={product.variants.indexOf(variant)} >
+                            <input type="radio" checked={index == checkedVariant} name="variant" id={index} onClick={() => setCheckedVariant(index)}/>
+                            <label htmlFor={index} >
                                 <h4 className="variant_name">{variant.name}</h4>
                                 <p className="variant_price">₦<b>{variant.price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
                                 {Boolean(variant.others.length)  && 
@@ -153,11 +166,17 @@ const ProductDetails = () => {
                 <button onClick={() => setCounter(prev => prev + 1)}>+</button>
             </div>
 
-            <button className="article_button" onClick={(e) => addToCart(e, (id+1), setSelectedProducts, counter, variantRefs, colorRefs)}>
-                Add to Cart
-            </button>
+            {!addedConfirmed && (
+                <button className="article_button" onClick={(e) => addToCart(e, (id+1), setSelectedProducts, counter, checkedVariant, colorRefs, setAddedConfirmed)}>
+                    Add to Cart
+                </button>
+            )}
 
-
+            {addedConfirmed && (
+                <button disabled={true} className="article_button_disabled">
+                    Added ...
+                </button>
+            )}
         </div>
     </article>
     )
