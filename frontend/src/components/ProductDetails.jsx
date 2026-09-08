@@ -37,7 +37,7 @@ const addToCart = (e, currentId, setSelectedProducts, amount, currentVariantId, 
                 colors: colors.current.filter(e => e.checked).map(e => e.name)
             }
             setAddedConfirmed(true)
-            setTimeout(() => setAddedConfirmed(false), 3000)
+            setTimeout(() => setAddedConfirmed(false), 1000)
             return copy
         }
         else{
@@ -50,7 +50,7 @@ const addToCart = (e, currentId, setSelectedProducts, amount, currentVariantId, 
                 colors: colors.current.filter(e => e.checked).map(e => e.name)
             })
             setAddedConfirmed(true)
-            setTimeout(() => setAddedConfirmed(false), 3000)
+            setTimeout(() => setAddedConfirmed(false), 1000)
             return copy
         }
 

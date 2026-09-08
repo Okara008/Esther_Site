@@ -51,7 +51,7 @@ const addToCart = (e, currentId, setSelectedProducts, currentVariantId, setAdded
         }
     })
     setAddedConfirmed(true)
-    setTimeout(() => setAddedConfirmed(false), 3000)
+    setTimeout(() => setAddedConfirmed(false), 1000)
 }
     
 const Cards = ({product}) => {

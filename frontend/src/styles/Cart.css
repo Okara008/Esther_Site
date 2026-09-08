@@ -59,7 +59,7 @@
     text-decoration: underline;
 }
 .totalSection .checkOut:active{
-    transform: translate(5px, 2px);
+    transform: scale(1.03);
 }
 
 .totalSection .checkOut img{

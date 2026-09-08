@@ -56,13 +56,16 @@ const Cart = ({setDisplayCart}) => {
                         className='checkOut'
                         href={`https://wa.me/2348100153987?text=${encodeURIComponent(
                             "--" + selectedProducts.length + " Items Purchased--\n\n" +
+
                             selectedProducts.map((product, index) =>{
-                                let copy = product_details.find(p => p.id = product.id)
+                                let copy = product_details.find(p => p.id == product.id)
+                                console.log(copy);
                                 return (
-                                    `-${index+1}-\nName - ${copy.name}\nAmount - ${product.variant.amount}\\nPrice - ${copy.price}\nSubtotal - ₦${subtotals[product.id]}\n\n`
+                                    `-${index+1}-\nName - ${copy.name}\nAmount - ${product.variant.amount}\nPrice - ${copy.price}\nSubtotal - ₦${subtotals[product.id]}\n\n`
                                     )
-                                }).join("")
-                                +"\n\n" + "Total: ₦" +  total
+                            }).join("")
+
+                            +"\n\n" + "Total: ₦" +  total
                             )}`
                         }
                                 >
