@@ -84,4 +84,5 @@
 .individual_card .cardActionBtnContainer .buyNowBtn{
     background-color: var(--bg);
     border: 2px solid var(--primary);
+    color: var(--text);
 }

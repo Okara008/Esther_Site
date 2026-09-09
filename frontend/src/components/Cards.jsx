@@ -95,16 +95,17 @@ const Cards = ({product}) => {
             </Link>
 
             <div className='cardActionBtnContainer'>
-                <button disabled={addedConfirmed} className={`addBtn ${addedConfirmed && "addedConfirmBtn"}`}
-                    onClick={() => addToCart(product.id, setSelectedProducts, selectedVariant, setAddedConfirmed)}
-                >
-                    {!addedConfirmed ? "Add to cart" : "Added ..."}
-                </button>
                 <a target="_blank" className='buyNowBtn'
                     href={`https://wa.me/${PHONENUMBER}?text=${encodeURIComponent(buyNow(product.id, selectedVariant))}`}
                 >
                     Buy Now
                 </a>
+
+                <button disabled={addedConfirmed} className={`addBtn ${addedConfirmed && "addedConfirmBtn"}`}
+                    onClick={() => addToCart(product.id, setSelectedProducts, selectedVariant, setAddedConfirmed)}
+                >
+                    {!addedConfirmed ? "Add to cart" : "Added ..."}
+                </button>
             </div>
         </div>
     )
