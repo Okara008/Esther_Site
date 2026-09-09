@@ -51,7 +51,6 @@ header{
 }
 
 .theme_icon:hover{
-    /* filter: drop-shadow(0 0 10px var(--bg)); */
     cursor: pointer;
 }
 
@@ -82,4 +81,13 @@ header{
     left: 50%;
     transform: translate(-40%, -50%);
     cursor: pointer;
+}
+
+@keyframes in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }

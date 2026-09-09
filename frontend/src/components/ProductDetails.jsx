@@ -10,7 +10,6 @@ const productImages = import.meta.glob(
 
 const addToCart = (e, currentId, setSelectedProducts, amount, currentVariantId, colors, setAddedConfirmed) => {
     e.preventDefault()
-    console.log(amount);
     setSelectedProducts(prev => {
         const copy = [...prev]
         let foundIndex = -1
@@ -36,8 +35,6 @@ const addToCart = (e, currentId, setSelectedProducts, amount, currentVariantId, 
                 },
                 colors: colors.current.filter(e => e.checked).map(e => e.name)
             }
-            setAddedConfirmed(true)
-            setTimeout(() => setAddedConfirmed(false), 1000)
             return copy
         }
         else{
@@ -49,12 +46,12 @@ const addToCart = (e, currentId, setSelectedProducts, amount, currentVariantId, 
                 },
                 colors: colors.current.filter(e => e.checked).map(e => e.name)
             })
-            setAddedConfirmed(true)
-            setTimeout(() => setAddedConfirmed(false), 1000)
             return copy
         }
-
+        
     })
+    setAddedConfirmed(true)
+    setTimeout(() => setAddedConfirmed(false), 1000)
 }
 
 const ProductDetails = () => {
@@ -62,7 +59,7 @@ const ProductDetails = () => {
     let { id } = useParams()
     id = Number(id)
     const [product] = useState(products[id])
-    const [checkedVariant, setCheckedVariant] = useState(0)
+    const [checkedVariant, setCheckedVariant] = useState(product.variants[0].id)
     const [imageCounter, setImageCounter] = useState(0)
     const [ addedConfirmed, setAddedConfirmed ] = useState(false)
     const colorRefs = useRef([])
@@ -93,7 +90,7 @@ const ProductDetails = () => {
             <h3 className="article_name">{product.name}</h3>
             <p className="article_category">-{product.category}-</p>
 
-            {product.colors?.length &&
+            {Boolean(product.colors?.length) &&
                 <div className="article_color">
                     {product.colors.map((color, index) => (
                         <div key={index}>
@@ -106,33 +103,33 @@ const ProductDetails = () => {
                 </div>
             }
 
-            {product.variants?.length ?
+            {product.variants?.length > 1 ?
                 <>
                     <div className="variant_details">
-                    {product.variants.map((variant, index) => (
-                        <Fragment key={variant.id}>  
-                            <input type="radio" checked={index == checkedVariant} name="variant" id={index} onClick={() => setCheckedVariant(index)}/>
-                            <label htmlFor={index} >
-                                <h4 className="variant_name">{variant.name}</h4>
-                                <p className="variant_price">₦<b>{variant.price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
-                                {Boolean(variant.others.length)  && 
-                                    variant.others.map((prop, index) => (<div key={index}> <strong>{prop.name}</strong>: <span>{prop.value}</span></div>))
-                                }
-                            </label>
-                        </Fragment>
-                    ))}
+                        {product.variants.map((variant, index) => (
+                            <Fragment key={variant.id}>  
+                                <input type="radio" checked={variant.id == checkedVariant} name="variant" id={index} onChange={() => setCheckedVariant(variant.id)}/>
+                                <label htmlFor={index} >
+                                    <h4 className="variant_name">{variant.name}</h4>
+                                    <p className="variant_price">₦<b>{variant.price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
+                                    {Boolean(variant.attributes.length)  && 
+                                        variant.attributes.map((prop, index) => (<div key={index}> <strong>{prop.name}</strong>: <span>{prop.value}</span></div>))
+                                    }
+                                </label>
+                            </Fragment>
+                        ))}
                     </div>
-                    <p> Total: <strong>₦{product.variants[checkedVariant]?.price * counter}</strong></p>
+                    <p> Total: <strong>₦{product.variants.find(v => v.id == checkedVariant)?.price * counter}</strong></p>
                 </>
                 
                 :
                 
                 <>
-                    <p className="article_price">₦<b>{product.price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
-                    {Boolean(product.others?.length)  && 
-                        product.others.map(prop => (<> <span>{prop.name}</span>: <span>{prop.value}</span></>))
+                    <p className="article_price">₦<b>{product.variants[0].price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
+                    {Boolean(product.attributes?.length)  && 
+                        product.attributes.map(prop => (<> <span>{prop.name}</span>: <span>{prop.value}</span></>))
                     }
-                    <p> Total: <strong>₦{product.price * counter}</strong></p>
+                    <p> Total: <strong>₦{product.variants[0].price * counter}</strong></p>
                 </>
             }
 

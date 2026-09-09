@@ -1,45 +1,38 @@
 .cardsSection .individual_card{
-    background-color: var(--cards);
-    padding: 1rem;
-    border-radius: 2rem;
-    cursor: pointer;
     color: var(--text);
-    text-decoration: none;
 }
 
-.cardsSection .individual_card:hover{
+.individual_card .individual_card_link{
+    background-color: var(--cards);
+    cursor: pointer;
+    display: block;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.individual_card .individual_card_link > *{
+    text-decoration: none;
+    color: var(--text);
+}
+
+.cardsSection .individual_card_link:hover{
     box-shadow: 0 0 10px var(--text);
 }
 
-.cardsSection h2{
+.individual_card_link h2{
     text-transform: capitalize;
     margin-bottom: 1rem;
+    text-decoration: none;
 }
 
-.cardsSection .product_img{
+.individual_card_link .product_img{
     width: 15rem;
     height: 15rem;
     border: .5rem solid var(--primary);
     border-radius: 2rem;
 }
 
-.individual_card button{
-    width: 100%;
-    padding: .4rem;
-    background-color: var(--primary);
-    color: #ffffff;
-    border: none;
-    margin-top: 1rem;
-    border-radius: 2rem;
-    cursor: pointer;
-}
-.individual_card button:hover
-{
-    background-color: var(--primary-hover);
-    box-shadow: 0 0 10px var(--primary);
-}
-
-.individual_card select{
+.individual_card_link select{
     width: 100%;
     background-color: var(--secondary);
     color: var(--text);
@@ -48,6 +41,47 @@
     border-radius: .3rem;
     cursor: pointer;
 }
-.individual_card select:hover, .individual_card option:hover{
+
+.individual_card_link select:hover, .individual_card_link option:hover{
     box-shadow: 0 0 10px var(--primary);
+}
+
+.individual_card .cardActionBtnContainer > *:not(.addedConfirmBtn):hover{
+    background-color: var(--primary-hover);
+    box-shadow: 0 0 10px var(--primary);
+    cursor: pointer;
+}
+
+.individual_card .addedConfirmBtn{
+    background-color: green;
+}
+
+
+.individual_card .cardActionBtnContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-block: .5rem;
+}
+
+.individual_card .cardActionBtnContainer > *{
+    width: 100%;
+    padding: .4rem;
+    color: #ffffff;
+    border-radius: .5rem;
+    text-align: center;
+    font-size: .8rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.addBtn{
+    background-color: var(--primary);
+    border: 2px solid var(--primary-hover);
+}
+
+.individual_card .cardActionBtnContainer .buyNowBtn{
+    background-color: var(--bg);
+    border: 2px solid var(--primary);
 }

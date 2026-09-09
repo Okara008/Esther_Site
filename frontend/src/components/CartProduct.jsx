@@ -10,7 +10,7 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
     const [IMGS, set_IMGS] = useState([])
     const [counter, setCounter] = useState(product.variant.amount)
 
-    const price = product_info?.price ?? product_info?.variants?.[product.variant.id]?.price
+    const price = product_info?.price ?? product_info?.variants?.find(p => product.variant.id).price
 
     useEffect(() => {
         for (let i = 0; i < product_info.images.length; i++) {
@@ -46,7 +46,7 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
 
             <div>
                 <div className="cartItemTop">
-                    <p className='cartItemName'><strong>{product_info.name}</strong> <small className='cartItemVariant'>{product_info?.variants?.[product.variant.id]?.name} </small> <small>- ₦{price}</small></p>
+                    <p className='cartItemName'><strong>{product_info.name}</strong> <small className='cartItemVariant'>{product_info?.variants?.find(p => product.variant.id)?.name} </small> <small>- ₦{price}</small></p>
                     {<p></p>}
                     <p className="subTotal">SubTotal: <strong>₦{(price) * counter} </strong></p>
                 </div>

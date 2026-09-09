@@ -1,0 +1,20 @@
+ {
+        "id": AI, PK, integer
+        "name": Not Null, string
+        "images": strings
+        "category": string, not null
+        "colors": string
+        "unit": string, not null
+        "quantity": integer, not null
+        "variants": [
+            {
+                "id": PK, integer, not null
+                "name": string
+                "price": 600,
+                "attributes": [
+                    "name": 
+                    "value":
+                ]
+            }
+        ]
+    },
