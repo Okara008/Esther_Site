@@ -1,14 +1,19 @@
 import Cards from "./Cards"
 import products from "../../content.json"
 import WHATSAPP_ICON from '../assets/icons/whatsapp_colored.png'
-import {useState, useContext} from 'react';
+import {useState, useContext, useEffect} from 'react';
 import { CartContext } from "./CartContext";
 
 const filterProducts = (category, setDisplayedProducts) => {
     setDisplayedProducts(products.filter(product => product.category == category))
 }
 
+
 const Home = () => {
+    useEffect(() => {
+        console.log(products);
+    },[])
+    
     const [productCategories] = useState(["hair accessories", "hair care", "hair brushes"])
     const [displayedProducts, setDisplayedProducts] = useState([...products])
     const [categoryIndex, setCategoryIndex] = useState(0)

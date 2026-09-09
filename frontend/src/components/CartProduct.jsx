@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import product_details from '../../content.json'
+
 const productImages = import.meta.glob(
     "../assets/product_pics/*",
     { eager: true, query: "?url", import: "default" }
@@ -18,6 +19,10 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
             image = productImages[`../assets/product_pics/${image}`];
             set_IMGS(prev => ([...prev, image]))
         }
+        console.log(product_details);
+        console.log(product);
+        console.log(product_details.filter(p => p.id == product.id));
+        console.log(product_details.filter(p => p.id == product.id)[0]);
     }, [])
     
     useEffect(() => {
@@ -47,7 +52,6 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
             <div>
                 <div className="cartItemTop">
                     <p className='cartItemName'><strong>{product_info.name}</strong> <small className='cartItemVariant'>{product_info?.variants?.find(p => product.variant.id)?.name} </small> <small>- ₦{price}</small></p>
-                    {<p></p>}
                     <p className="subTotal">SubTotal: <strong>₦{(price) * counter} </strong></p>
                 </div>
 
