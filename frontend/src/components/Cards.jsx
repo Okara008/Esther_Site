@@ -54,7 +54,7 @@ const addToCart = (currentId, setSelectedProducts, currentVariantId, setAddedCon
 }
 
 const buyNow = (currentId, currentVariantId) => {
-    const currentProduct = product_details.find(p => p.id = currentId)
+    const currentProduct = product_details.find(p => p.id == currentId)
     const currentVariant = currentProduct.variants.find(v => v.id == currentVariantId)
     return(
         `Name - ${currentProduct.name} - ${currentVariant.name} \nPrice - ₦${currentVariant.price} per ${currentProduct.unit}`
