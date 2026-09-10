@@ -11,7 +11,7 @@ import { CartContext } from "./CartContext";
 
 const Header = () => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const {selectedProducts, setSelectedProducts} = useContext(CartContext)
+    const {selectedProducts, setSearchText} = useContext(CartContext)
     const [darkMode, setDarkMode] = useState(mediaQuery);
     const [displayCart, setDisplayCart] = useState(!true)
 
@@ -40,7 +40,7 @@ const Header = () => {
             <Link to='/'><img src={LOGO_ICON} alt="icon" height={50} className='logo_icon'/></Link>
             
             <div className="search_container">
-                <input type="text" placeholder='Search...' className='search_input'/>
+                <input type="text" placeholder='Search...' onChange={(e) => setSearchText(e.target.value)} className='search_input'/>
                 <button className='search_icon'><img src={SEARCH_ICON} alt="icon"/></button>
             </div>
 

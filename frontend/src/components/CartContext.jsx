@@ -4,9 +4,10 @@ export const CartContext = createContext()
 
 const CartItemProvider = ({children}) => {
     const [selectedProducts, setSelectedProducts] = useState([])
+    const [searchText, setSearchText] = useState("")
 
     return (
-        <CartContext.Provider value={{selectedProducts, setSelectedProducts}}>
+        <CartContext.Provider value={{selectedProducts, setSelectedProducts, searchText, setSearchText}}>
             {children}
         </CartContext.Provider>
     )

@@ -4,14 +4,16 @@
     background-color: var(--secondary);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: safe center;
     gap: 2rem;
     padding: 1rem;
+    overflow-x: auto;
 }
 
 .product_category div{
     text-transform: capitalize;
     cursor: pointer;
+    white-space: nowrap;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     border: .2rem solid var(--primary);
     padding: .5rem 1rem;

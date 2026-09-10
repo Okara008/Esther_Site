@@ -4,29 +4,34 @@ import WHATSAPP_ICON from '../assets/icons/whatsapp_colored.png'
 import {useState, useContext, useEffect} from 'react';
 import { CartContext } from "./CartContext";
 
-const filterProducts = (category, setDisplayedProducts) => {
-    setDisplayedProducts(products.filter(product => product.category == category))
+const filterProducts = (category, setDisplayedProducts, searchText) => {
+    setDisplayedProducts([...products])
+    if(searchText){
+        setDisplayedProducts(prev => (prev.filter(p => p.name.includes(searchText) || p.category.includes(searchText) || p.variants.some(v => v.name.includes(searchText)))))
+    }
+    if(!category) return
+    setDisplayedProducts(prev => prev.filter(product => product.category == category))
 }
 
-
 const Home = () => {
-    useEffect(() => {
-        console.log(products);
-    },[])
-    
-    const [productCategories] = useState(["hair accessories", "hair care", "hair brushes"])
+    const [productCategories] = useState(["hair accessories", "hair care", "hair brushes", "hair combs", "Jiberish"])
     const [displayedProducts, setDisplayedProducts] = useState([...products])
     const [categoryIndex, setCategoryIndex] = useState(0)
-    const {selectedProducts, setSelectedProducts} = useContext(CartContext)
+    const {searchText, setSelectedProducts} = useContext(CartContext)
+
+    useEffect(() => {
+        filterProducts(productCategories[categoryIndex-1], setDisplayedProducts, searchText)
+    }, [searchText])
+
     return(
         <main>
             <nav className="product_category">
-                <div className={`${!categoryIndex && 'selected'}`} onClick={() => {setDisplayedProducts([...products]); setCategoryIndex(0)}}>All</div>
+                <div className={`${!categoryIndex && 'selected'}`} onClick={() => {filterProducts(null, setDisplayedProducts, searchText); setCategoryIndex(0)}}>All</div>
                 
                 {productCategories.map((category, index) => 
                     <div 
-                        className={`${categoryIndex == (productCategories.indexOf(category)+1) && 'selected'}`} 
-                        onClick={() => {filterProducts(category, setDisplayedProducts); setCategoryIndex(productCategories.indexOf(category)+1)}}
+                        className={`${categoryIndex == (index+1) && 'selected'}`} 
+                        onClick={() => {filterProducts(category, setDisplayedProducts, searchText); setCategoryIndex(index+1)}}
                         key={index}
                     >   
                         {category}  
