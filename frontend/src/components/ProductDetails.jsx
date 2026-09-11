@@ -8,8 +8,7 @@ const productImages = import.meta.glob(
     { eager: true, query: "?url", import: "default" }
 )
 
-const addToCart = (e, currentId, setSelectedProducts, amount, currentVariantId, selectedColors, setAddedConfirmed) => {
-    e.preventDefault()
+const addToCart = (currentId, setSelectedProducts, amount, currentVariantId, selectedColors, setAddedConfirmed) => {
     setSelectedProducts(prev => {
         const copy = [...prev]
         let foundIndex = -1
@@ -58,7 +57,20 @@ const addToCart = (e, currentId, setSelectedProducts, amount, currentVariantId, 
     setTimeout(() => setAddedConfirmed(false), 1000)
 }
 
+const buyNow = (currentId, amount, currentVariantId, selectedColors) => {
+    const currentProduct = products.find(p => p.id == currentId)
+    const currentVariant = currentProduct.variants.find(v => v.id == currentVariantId)
+    const formattedColors = Object.entries(selectedColors)
+    .filter(([_, value]) => value.checked)
+    .map(([colorName, value]) => `${colorName} (x${value.count})`);
+
+    const display = `Name - ${currentProduct.name} - ${currentVariant.name} \nAmount - ${amount} ${currentProduct.unit}(s) \nPrice - ₦${currentVariant.price} per ${currentProduct.unit} \nColors - ${formattedColors.length > 0 ? formattedColors : "none"} \n\n\nTotal - ${currentVariant.price * amount}`
+    return display
+}
+
 const ProductDetails = () => {
+    const PHONENUMBER = "2348100153987"
+
     const {selectedProducts, setSelectedProducts} = useContext(CartContext)
     let { id } = useParams()
     id = Number(id)
@@ -109,8 +121,6 @@ const ProductDetails = () => {
         IMGS.push(image)
     }
 
-    
-
     return (
     <article className="productContainer">
         <div  className="product_img">
@@ -155,7 +165,6 @@ const ProductDetails = () => {
 
                                     <div className="article_counter">
                                         <button onClick={() => handleColorCounter(colorName, -1)}>-</button>
-                                        {/* <span>{value.count}</span> */}
                                         <input type="text" value={value.count} inputMode="numeric"
                                             onChange={(e) => setSelectedColors(prev => ({
                                                 ...prev,
@@ -218,7 +227,7 @@ const ProductDetails = () => {
             }
 
             <div className="article_counter">
-                <button disabled={hasSelectedColors} className={hasSelectedColors && "disableBtn"} onClick={() => handleProductCounter(-1)}>-</button>
+                <button disabled={hasSelectedColors} className={hasSelectedColors ? "disableBtn" : ""} onClick={() => handleProductCounter(-1)}>-</button>
 
                 <input type="text" inputMode="numeric"
                     value={hasSelectedColors ? selectedColorTotal : counter} 
@@ -242,20 +251,22 @@ const ProductDetails = () => {
                     }
                 />
 
-                <button disabled={hasSelectedColors}  className={hasSelectedColors && "disableBtn"} onClick={() => handleProductCounter(1)}>+</button>
+                <button disabled={hasSelectedColors}  className={hasSelectedColors ? "disableBtn" : ""} onClick={() => handleProductCounter(1)}>+</button>
             </div>
 
-            {!addedConfirmed && (
-                <button className="article_button" onClick={(e) => addToCart(e, (id+1), setSelectedProducts, (hasSelectedColors ? selectedColorTotal : counter), checkedVariant, selectedColors, setAddedConfirmed)}>
-                    Add to Cart
-                </button>
-            )}
+            <div className='articleActionBtns'>
+                <a target="_blank" className='buyNowBtn'
+                    href={`https://wa.me/${PHONENUMBER}?text=${encodeURIComponent(buyNow(product.id, (hasSelectedColors ? selectedColorTotal : counter), checkedVariant, selectedColors))}`}
+                >
+                    Buy Now
+                </a>
 
-            {addedConfirmed && (
-                <button disabled={true} className="article_button_disabled">
-                    Added ...
+                <button disabled={addedConfirmed} className={`addBtn ${addedConfirmed && "article_button"}`}
+                    onClick={(e) => addToCart(product.id, setSelectedProducts, (hasSelectedColors ? selectedColorTotal : counter), checkedVariant, selectedColors, setAddedConfirmed)}
+                >
+                    {!addedConfirmed ? "Add to cart" : "Added ..."}
                 </button>
-            )}
+            </div>
         </div>
     </article>
     )

@@ -14,7 +14,7 @@ const filterProducts = (category, setDisplayedProducts, searchText) => {
 }
 
 const Home = () => {
-    const [productCategories] = useState(["hair accessories", "hair care", "hair brushes", "hair combs", "Jiberish"])
+    const [productCategories] = useState(["hair accessories", "hair care", "hair brushes"])
     const [displayedProducts, setDisplayedProducts] = useState([...products])
     const [categoryIndex, setCategoryIndex] = useState(0)
     const {searchText, setSelectedProducts} = useContext(CartContext)

@@ -105,10 +105,10 @@ const Cart = ({setDisplayCart}) => {
                             target="_blank"
                             className='checkOut'
                             onClick={(e) => {
-                                console.log(checkout(selectedProducts, product_details, subtotals, total))
+                                // console.log(checkout(selectedProducts, product_details, subtotals, total))
                                 if (!selectedProducts.length) e.preventDefault()
                             }}
-                            // href={`https://wa.me/${PHONENUMBER}?text=${encodeURIComponent( checkout(selectedProducts, product_details, subtotals, total) )}`}
+                            href={`https://wa.me/${PHONENUMBER}?text=${encodeURIComponent( checkout(selectedProducts, product_details, subtotals, total) )}`}
                         >
                             Check Out <img src={WHATSAPP_ICON} alt="whatsapp" />
                         </a>

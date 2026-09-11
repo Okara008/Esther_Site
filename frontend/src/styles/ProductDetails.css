@@ -52,11 +52,33 @@ article.productContainer .product_img img{
     text-transform: capitalize;
 }
 
-.article_button{
+.articleActionBtns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-block: 1rem;
+}
+
+.articleActionBtns > *{
+    display: block;
     width: 100%;
     font-size: 1rem;
     padding: .5rem;
-    margin-block: 1rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.articleActionBtns a{
+    background-color: var(--bg);
+    border: 2px solid var(--primary);
+    color: var(--text);
+}
+.articleActionBtns a:hover{
+    background-color: var(--secondary);
+}
+
+.articleActionBtns button{
     background-color: var(--primary);
     border: none;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -74,13 +96,13 @@ article.productContainer .product_img img{
     background-color: green;
 }
 
-.article_button:hover{
+.articleActionBtns button:hover{
     background-color: var(--primary-hover);
     cursor: pointer;
 }
 
-.article_button:active{
-    transform: scale(.99);
+.articleActionBtns > *:active{
+    transform: scale(.9);
 }
 
 .article_counter{
