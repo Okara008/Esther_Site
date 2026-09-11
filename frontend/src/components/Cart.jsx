@@ -24,7 +24,7 @@ const checkout = (selectedProducts, product_details, subtotals, total) => {
             }
 
             return (
-                `-${count+1}-\nName - ${details.name} - ${details.variant_details?.name}\nAmount - ${details.amount} ${details.unit}(s) ${details.quantity > 1 ? `[${details.quantity} per ${details.unit}]` : ""}\nPrice - ₦${details.variant_details?.price}\nColor(s) - ${Boolean(details.colors.length) ? details.colors : "none"}\nSubtotal - ₦${subtotals[product.id]}\n\n`
+                `-${count+1}-\nName - ${details.name} - ${details.variant_details?.name}\nAmount - ${details.amount} ${details.unit}(s) ${details.quantity > 1 ? `[${details.quantity} per ${details.unit}]` : ""}\nPrice - ₦${details.variant_details?.price}\nColor(s) - ${Boolean(details.colors.length) ? details.colors : "none"}\nSubtotal - ₦${details.variant_details.price * details.amount}\n\n`
             )
         }).join("")
 
@@ -38,13 +38,50 @@ const Cart = ({setDisplayCart}) => {
     const [ total, setTotal ] = useState(0)
     const [ subtotals, setSubtotals] = useState({})
     
+    // useEffect(() => {
+    //     setSelectedProducts([
+    //         {
+    //             id: 1,
+    //             variant: {
+    //                 id: 1,
+    //                 amount: 1
+    //             },
+    //             colors: ["Blue x13", "red x5"]
+    //         },
+    //         {
+    //             id: 6,
+    //             variant: {
+    //                 id: 1,
+    //                 amount: 2
+    //             },
+    //             colors: ["Blue x23", "red x5"]
+    //         },
+    //         {
+    //             id: 6,
+    //             variant: {
+    //                 id: 2,
+    //                 amount: 3
+    //             },
+    //             colors: ["Blue x33", "red x5"]
+    //         },
+    //     ])
+    // }, [])
+
     useEffect(() => {
-        const total = Object.values(subtotals).reduce(
-            (sum, subtotal) => sum + subtotal,
-            0
-        )
-        setTotal(total)
-    }, [subtotals])
+        setTotal(
+            selectedProducts.reduce((total, cartItem) => {
+                const product = product_details.find(
+                    product => product.id === cartItem.id
+                );
+                    
+                const variant = product.variants.find(
+                    variant => variant.id === cartItem.variant.id
+                );
+                return total + variant.price * cartItem.variant.amount;
+            }, 0)
+            )
+            
+    }, [selectedProducts])
 
     return(
         <div className="outerShell">
@@ -52,7 +89,10 @@ const Cart = ({setDisplayCart}) => {
                 <h3>{selectedProducts.length} Items Selected</h3>
                 <div className="notTotalSection">
                     {Boolean(selectedProducts.length) && (
-                        <section className="cartItemsContainer">{selectedProducts.map((product, index) => <CartProduct key={index} product={product} setSelectedProducts={setSelectedProducts} setSubtotals={setSubtotals} />)}</section>
+                        <section className="cartItemsContainer">
+                            {selectedProducts.map((cartItem, index) => 
+                                <CartProduct key={`${cartItem.id}-${cartItem.variant.id}`} cartItem={cartItem} setSelectedProducts={setSelectedProducts} selectedProducts={selectedProducts} index={index} />)}
+                        </section>
                     )}
                 </div>
 
@@ -64,7 +104,11 @@ const Cart = ({setDisplayCart}) => {
                         <a
                             target="_blank"
                             className='checkOut'
-                            href={`https://wa.me/${PHONENUMBER}?text=${encodeURIComponent( checkout(selectedProducts, product_details, subtotals, total) )}`}
+                            onClick={(e) => {
+                                console.log(checkout(selectedProducts, product_details, subtotals, total))
+                                if (!selectedProducts.length) e.preventDefault()
+                            }}
+                            // href={`https://wa.me/${PHONENUMBER}?text=${encodeURIComponent( checkout(selectedProducts, product_details, subtotals, total) )}`}
                         >
                             Check Out <img src={WHATSAPP_ICON} alt="whatsapp" />
                         </a>

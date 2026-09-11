@@ -1,48 +1,48 @@
 import { useEffect, useState } from 'react'
 import product_details from '../../content.json'
+import DELETE_ICON from '../assets/icons/delete_1.png' 
 
 const productImages = import.meta.glob(
     "../assets/product_pics/*",
     { eager: true, query: "?url", import: "default" }
 )
 
-const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
-    const [product_info, set_product_info] = useState(product_details.filter(p => p.id == product.id)[0])
+const CartProduct = ({index, cartItem, selectedProducts, setSelectedProducts}) => {
+    const product = product_details.find(product => product.id === cartItem.id);
+    const variant = product.variants.find(variant => variant.id === cartItem.variant.id);
     const [IMGS, set_IMGS] = useState([])
-    const [counter, setCounter] = useState(product.variant.amount)
+    const [counter, setCounter] = useState(cartItem.variant.amount)
+    const price = variant.price
 
-    const price = product_info?.price ?? product_info?.variants?.find(p => product.variant.id).price
+    const deleteCartItem = (productId, variantId) => {
+        setSelectedProducts(prev => 
+            prev.filter(item => !((item.id == productId) && (item.variant.id == variantId)))
+        )
+    }
 
     useEffect(() => {
-        for (let i = 0; i < product_info.images.length; i++) {
-            let image = product_info.images[i];
-            image = productImages[`../assets/product_pics/${image}`];
-            set_IMGS(prev => ([...prev, image]))
+        let images = []
+        for (let i = 0; i < product.images.length; i++) {
+            images[i] = productImages[`../assets/product_pics/${product.images[i]}`];
         }
-        console.log(product_details);
-        console.log(product);
-        console.log(product_details.filter(p => p.id == product.id));
-        console.log(product_details.filter(p => p.id == product.id)[0]);
-    }, [])
+        set_IMGS(([...images]))
+    }, [selectedProducts])
     
     useEffect(() => {
-        setSubtotals(prev => ({
-            ...prev,
-            [product.id]: (price) * counter
-        }))
-
         setSelectedProducts(prev => {
             let copy = [...prev]
-            let index = copy.findIndex(e => e.id == product.id)
-            copy[index] = {
-                ...copy[index],
+            let pIndex = copy.findIndex(p => ((p.id == product.id) && (p.variant.id == variant.id)))
+            
+            copy[pIndex] = {
+                ...copy[pIndex],
                 variant: {
-                    ...copy[index].variant,
+                    ...copy[pIndex].variant,
                     amount: counter
                 }
             }
             return copy
         })
+
     }, [counter])
 
     return (
@@ -51,8 +51,8 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
 
             <div>
                 <div className="cartItemTop">
-                    <p className='cartItemName'><strong>{product_info.name}</strong> <small className='cartItemVariant'>{product_info?.variants?.find(p => product.variant.id)?.name} </small> <small>- ₦{price}</small></p>
-                    <p className="subTotal">SubTotal: <strong>₦{(price) * counter} </strong></p>
+                    <p className='cartItemName'>{index+1}. <strong>{product.name}</strong> <small className='cartItemVariant'>{variant.name} </small> <small>[₦{price.toLocaleString()}]</small></p>
+                    <p className="subTotal"><strong>₦{(price * counter).toLocaleString()} </strong></p>
                 </div>
 
                 <hr />
@@ -88,14 +88,18 @@ const CartProduct = ({product, setSubtotals, setSelectedProducts}) => {
                         <button onClick={() => setCounter(prev => prev + 1)}>+</button>
                     </div>
 
-                    {Boolean(product.colors.length) &&
+                    {Boolean(cartItem.colors.length) &&
                         (<p>
                             <strong>Colors: </strong>
-                            {product.colors?.map((color, i) => (
-                                <small className='cartItemColor'> {color}{i < (product.colors.length-1) ? ',' : '.'}</small>
+                            {cartItem.colors?.map((color, i) => (
+                                <small className='cartItemColor' key={i}> {color}{i < (cartItem.colors.length-1) ? ', ' : '.'}</small>
                             ))}
                         </p>)
                     }
+
+                    <button className="cartItemDelete" onClick={() => deleteCartItem(cartItem.id, cartItem.variant.id)}>
+                        <img src={DELETE_ICON} alt="delete" />
+                    </button>
                 </div>
             </div>
         </div>
