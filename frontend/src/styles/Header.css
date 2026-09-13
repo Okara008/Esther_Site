@@ -91,3 +91,9 @@ header{
         opacity: 1;
     }
 }
+
+@media screen and (max-width: 800px) {
+    .search_container{
+        width: 40%;
+    }
+}

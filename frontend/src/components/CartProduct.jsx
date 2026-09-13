@@ -1,23 +1,30 @@
 import { useEffect, useState } from 'react'
 import product_details from '../../content.json'
 import DELETE_ICON from '../assets/icons/delete_1.png' 
+import { Link, useNavigate } from 'react-router-dom'
 
 const productImages = import.meta.glob(
     "../assets/product_pics/*",
     { eager: true, query: "?url", import: "default" }
 )
 
-const CartProduct = ({index, cartItem, selectedProducts, setSelectedProducts}) => {
+const CartProduct = ({index, cartItem, selectedProducts, setSelectedProducts, setDisplayCart}) => {
     const product = product_details.find(product => product.id === cartItem.id);
     const variant = product.variants.find(variant => variant.id === cartItem.variant.id);
     const [IMGS, set_IMGS] = useState([])
     const [counter, setCounter] = useState(cartItem.variant.amount)
     const price = variant.price
+    const navigate = useNavigate()
 
     const deleteCartItem = (productId, variantId) => {
         setSelectedProducts(prev => 
             prev.filter(item => !((item.id == productId) && (item.variant.id == variantId)))
         )
+    }
+
+    const linkToProduct = () => {
+        setDisplayCart(false)
+        navigate(`/product/${product.id}`)
     }
 
     useEffect(() => {
@@ -47,11 +54,11 @@ const CartProduct = ({index, cartItem, selectedProducts, setSelectedProducts}) =
 
     return (
         <div key={product.id} className='cartItem'>
-            <div className="cartItemImg"><img src={IMGS[0]} alt="" /></div>
+            <Link onClick={linkToProduct} className="cartItemImg"><img src={IMGS[0]} alt="" /></Link>
 
             <div>
                 <div className="cartItemTop">
-                    <p className='cartItemName'>{index+1}. <strong>{product.name}</strong> <small className='cartItemVariant'>{variant.name} </small> <small>[₦{price.toLocaleString()}]</small></p>
+                    <Link onClick={linkToProduct} className='cartItemName'>{index+1}. <strong>{product.name}</strong> <small className='cartItemVariant'>{variant.name} </small> <small>[₦{price.toLocaleString()}]</small></Link>
                     <p className="subTotal"><strong>₦{(price * counter).toLocaleString()} </strong></p>
                 </div>
 

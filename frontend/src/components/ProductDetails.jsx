@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useState, useRef, useContext, Fragment } from 'react';
+import { useState, useRef, useContext, Fragment, useEffect } from 'react';
 import products from "../../content.json"
 import { CartContext } from "./CartContext";
 
@@ -71,15 +71,26 @@ const buyNow = (currentId, amount, currentVariantId, selectedColors) => {
 const ProductDetails = () => {
     const PHONENUMBER = "2348100153987"
 
-    const {selectedProducts, setSelectedProducts} = useContext(CartContext)
+    const {setSelectedProducts} = useContext(CartContext)
     let { id } = useParams()
     id = Number(id)
-    const [product] = useState(products[id])
+
+
+    const [product, setProduct] = useState(products.find(p => p.id == id))
     const [checkedVariant, setCheckedVariant] = useState(product.variants[0].id)
     const [imageCounter, setImageCounter] = useState(0)
     const [ addedConfirmed, setAddedConfirmed ] = useState(false)
     const [selectedColors, setSelectedColors] = useState({});
     const [counter, setCounter] = useState(1)
+
+    useEffect(() => {
+        setProduct(products.find(p => p.id == id))
+        setCheckedVariant(product.variants[0].id)
+        setImageCounter(0)
+        setSelectedColors({})
+        setAddedConfirmed(false)
+        setCounter(1)
+    }, [id])
     let IMGS = []
 
     const selectedColorTotal = Object.values(selectedColors)

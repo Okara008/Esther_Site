@@ -113,6 +113,15 @@
     justify-content: center;
     border: 5px dashed var(--primary);
 }
+.cartItem .cartItemImg:hover{
+    box-shadow: 10px 0 10px var(--bg);
+    opacity: .7;
+}
+
+.cartItem .cartItemImg:active{
+    box-shadow: 7px 0 10px var(--bg);
+    opacity: .7;
+}
 
 .cartItem .cartItemImg img{
     object-fit: contain;
@@ -140,8 +149,16 @@
 }
 
 .cartItemName{
+    color: var(--text);
     text-transform: capitalize;
     font-weight: bold;
+}
+.cartItemName:hover{
+    text-decoration: underline;
+    color: var(--primary);
+}
+.cartItemName:active{
+    color: var(--primary-hover);
 }
 
 .cartItemCounter input{

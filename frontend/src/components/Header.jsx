@@ -10,7 +10,7 @@ import { useState , useEffect, useContext } from "react";
 import { CartContext } from "./CartContext";
 
 const Header = () => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const {selectedProducts, setSearchText} = useContext(CartContext)
     const [darkMode, setDarkMode] = useState(mediaQuery);
     const [displayCart, setDisplayCart] = useState(!true)

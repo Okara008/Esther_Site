@@ -70,7 +70,7 @@ const Cards = ({product}) => {
 
     return (
         <div className='individual_card' >
-            <Link className='individual_card_link' to={`/product/${product.id-1}`} >
+            <Link className='individual_card_link' to={`/product/${product.id}`} >
                 <img src={image} alt="product images" height={100} className="product_img"/>
                 <h2>{product.name}</h2>
                 {

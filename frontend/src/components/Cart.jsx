@@ -91,7 +91,7 @@ const Cart = ({setDisplayCart}) => {
                     {Boolean(selectedProducts.length) && (
                         <section className="cartItemsContainer">
                             {selectedProducts.map((cartItem, index) => 
-                                <CartProduct key={`${cartItem.id}-${cartItem.variant.id}`} cartItem={cartItem} setSelectedProducts={setSelectedProducts} selectedProducts={selectedProducts} index={index} />)}
+                                <CartProduct key={`${cartItem.id}-${cartItem.variant.id}`} setDisplayCart={setDisplayCart} cartItem={cartItem} setSelectedProducts={setSelectedProducts} selectedProducts={selectedProducts} index={index} />)}
                         </section>
                     )}
                 </div>
