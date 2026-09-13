@@ -10,7 +10,15 @@ const productImages = import.meta.glob(
 
 const CartProduct = ({index, cartItem, selectedProducts, setSelectedProducts, setDisplayCart}) => {
     const product = product_details.find(product => product.id === cartItem.id);
+    if (!product) {
+        return null;
+    }
+
     const variant = product.variants.find(variant => variant.id === cartItem.variant.id);
+    if (!variant) {
+        return null;
+    }
+    
     const [IMGS, set_IMGS] = useState([])
     const [counter, setCounter] = useState(cartItem.variant.amount)
     const price = variant.price
@@ -39,7 +47,8 @@ const CartProduct = ({index, cartItem, selectedProducts, setSelectedProducts, se
         setSelectedProducts(prev => {
             let copy = [...prev]
             let pIndex = copy.findIndex(p => ((p.id == product.id) && (p.variant.id == variant.id)))
-            
+
+            if (pIndex === -1) return copy
             copy[pIndex] = {
                 ...copy[pIndex],
                 variant: {

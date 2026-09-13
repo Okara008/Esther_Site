@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import LOGO_ICON from '../assets/icons/icon_black.png'
 import CART_ICON from '../assets/icons/shopping-cart.png'

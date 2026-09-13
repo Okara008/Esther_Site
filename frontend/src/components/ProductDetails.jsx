@@ -1,5 +1,6 @@
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import { useState, useRef, useContext, Fragment, useEffect } from 'react';
+import NotFound from './NotFound'
 import products from "../../content.json"
 import { CartContext } from "./CartContext";
 
@@ -77,6 +78,11 @@ const ProductDetails = () => {
 
 
     const [product, setProduct] = useState(products.find(p => p.id == id))
+
+    if (!product) {
+        return <NotFound />
+    }
+
     const [checkedVariant, setCheckedVariant] = useState(product.variants[0].id)
     const [imageCounter, setImageCounter] = useState(0)
     const [ addedConfirmed, setAddedConfirmed ] = useState(false)
@@ -84,8 +90,9 @@ const ProductDetails = () => {
     const [counter, setCounter] = useState(1)
 
     useEffect(() => {
-        setProduct(products.find(p => p.id == id))
-        setCheckedVariant(product.variants[0].id)
+        const newProduct = products.find(p => p.id == id)
+        setProduct(newProduct)
+        setCheckedVariant(newProduct.variants[0].id)
         setImageCounter(0)
         setSelectedColors({})
         setAddedConfirmed(false)
@@ -139,8 +146,8 @@ const ProductDetails = () => {
 
             {IMGS.length > 1 && (
                 <div className="img_nav">
-                    <button style={{left: 0}} onClick={() => setImageCounter(prev => ((prev + 1) % IMGS.length))}>&lt;</button>
                     <button style={{right: 0}} onClick={() => setImageCounter(prev => ((prev > 0) ? (prev - 1) : (IMGS.length-1) ))}>&gt;</button>
+                    <button style={{left: 0}} onClick={() => setImageCounter(prev => ((prev + 1) % IMGS.length))}>&lt;</button>
                 </div>
             )}
         </div>
@@ -188,7 +195,7 @@ const ProductDetails = () => {
                                                 ...prev,
                                                 [colorName]: {
                                                     ...prev[colorName],
-                                                    count: isNaN(e.target.value) ? 0 : Number(e.target.value)
+                                                    count: isNaN(e.target.value) ? 1 : Number(e.target.value)
                                                 }
                                             }))} 
                                         />
@@ -229,7 +236,7 @@ const ProductDetails = () => {
                 <>
                     <p className="article_price">₦<b>{product.variants[0].price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
                     {Boolean(product.attributes?.length)  && 
-                        product.attributes.map(prop => (<> <span>{prop.name}</span>: <span>{prop.value}</span></>))
+                        product.attributes.map((prop, index) => (<Fragment key={index}> <span>{prop.name}</span>: <span>{prop.value}</span></Fragment>))
                     }
                     <p> Total: 
                         <strong>₦{product.variants[0]?.price * (hasSelectedColors ? selectedColorTotal: counter)}</strong>
@@ -246,7 +253,7 @@ const ProductDetails = () => {
                     onChange={(e) => 
                         setCounter(prev => {
                             const num = Number(e.target.value)
-                            if(isNaN(num)){
+                            if(isNaN(num) || num < 0){
                                 return prev
                             }
                             return num

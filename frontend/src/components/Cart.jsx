@@ -4,9 +4,15 @@ import { useState, useContext, useEffect} from 'react';
 import { CartContext } from "./CartContext";
 import product_details from '../../content.json'
 
-const checkout = (selectedProducts, product_details, subtotals, total) => {
+const checkout = (selectedProducts, product_details, total) => {
+    let total_items = 0
+    for(let i = 0; i < selectedProducts.length; i++) {
+        const amount = selectedProducts[i].variant.amount;
+        total_items += amount
+    }
+
     return(
-        `--${selectedProducts.length} Item(s) to be Purchased--\n\n` +
+        `--${total_items} Item(s) to be Purchased--\n\n` +
 
         selectedProducts.map((product, count) =>{
             let copy = product_details.find(p => p.id == product.id)
@@ -36,7 +42,7 @@ const Cart = ({setDisplayCart}) => {
     const PHONENUMBER = "2348100153987"
     const {selectedProducts, setSelectedProducts} = useContext(CartContext)
     const [ total, setTotal ] = useState(0)
-    const [ subtotals, setSubtotals] = useState({})
+    const [amoutOfItems, setAmountOfItems] = useState(0)
     
     // useEffect(() => {
     //     setSelectedProducts([
@@ -79,14 +85,19 @@ const Cart = ({setDisplayCart}) => {
                 );
                 return total + variant.price * cartItem.variant.amount;
             }, 0)
-            )
-            
+        )
+        let total = 0
+        for(let i = 0; i < selectedProducts.length; i++) {
+            const amount = selectedProducts[i].variant.amount;
+            total += amount
+        }
+        setAmountOfItems(total)
     }, [selectedProducts])
 
     return(
         <div className="outerShell">
             <section className="cartSection">
-                <h3>{selectedProducts.length} Items Selected</h3>
+                <h3>{amoutOfItems} Item(s) Selected [{selectedProducts.length} product(s)]</h3>
                 <div className="notTotalSection">
                     {Boolean(selectedProducts.length) && (
                         <section className="cartItemsContainer">
@@ -105,10 +116,10 @@ const Cart = ({setDisplayCart}) => {
                             target="_blank"
                             className='checkOut'
                             onClick={(e) => {
-                                // console.log(checkout(selectedProducts, product_details, subtotals, total))
+                                // console.log(checkout(selectedProducts, product_details, total))
                                 if (!selectedProducts.length) e.preventDefault()
                             }}
-                            href={`https://wa.me/${PHONENUMBER}?text=${encodeURIComponent( checkout(selectedProducts, product_details, subtotals, total) )}`}
+                            href={`https://wa.me/${PHONENUMBER}?text=${encodeURIComponent( checkout(selectedProducts, product_details, total) )}`}
                         >
                             Check Out <img src={WHATSAPP_ICON} alt="whatsapp" />
                         </a>
