@@ -21,7 +21,8 @@
 
 .individual_card_link h2{
     text-transform: capitalize;
-    margin-bottom: 1rem;
+    margin: 0;
+    margin-top: 1rem;
     text-decoration: none;
 }
 
@@ -32,17 +33,24 @@
     border-radius: 2rem;
 }
 
-.individual_card_link select{
+.cartPricesContainer{
+    margin-block: 1rem;
+    padding: 0 1rem;
+}
+
+.individual_card select, .cartPricesContainer span{
+    display: block;
     width: 100%;
     background-color: var(--secondary);
     color: var(--text);
     text-transform: capitalize;
     padding: .2rem .5rem;
+    border: 1px solid var(--text);
+    font-size: .86rem;
     border-radius: .3rem;
-    cursor: pointer;
 }
 
-.individual_card_link select:hover, .individual_card_link option:hover{
+.individual_card select:hover, .individual_card option:hover{
     box-shadow: 0 0 10px var(--primary);
 }
 
@@ -50,6 +58,10 @@
     background-color: var(--primary-hover);
     box-shadow: 0 0 10px var(--primary);
     cursor: pointer;
+}
+
+.cartPricesContainer span{
+    background-color: var(--cards);
 }
 
 .individual_card .addedConfirmBtn{

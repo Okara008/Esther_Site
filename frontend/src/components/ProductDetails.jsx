@@ -64,7 +64,9 @@ const buyNow = (currentId, amount, currentVariantId, selectedColors) => {
     const formattedColors = Object.entries(selectedColors)
     .filter(([_, value]) => value.checked)
     .map(([colorName, value]) => `${colorName} (x${value.count})`);
-
+    
+    if(!currentVariant) return
+    console.log(currentId, currentVariant.name);
     const display = `Name - ${currentProduct.name} - ${currentVariant.name} \nAmount - ${amount} ${currentProduct.unit}(s) \nPrice - ₦${currentVariant.price} per ${currentProduct.unit} \nColors - ${formattedColors.length > 0 ? formattedColors : "none"} \n\n\nTotal - ${currentVariant.price * amount}`
     return display
 }
@@ -79,20 +81,22 @@ const ProductDetails = () => {
 
     const [product, setProduct] = useState(products.find(p => p.id == id))
 
-    if (!product) {
-        return <NotFound />
-    }
-
-    const [checkedVariant, setCheckedVariant] = useState(product.variants[0].id)
+    
+    const [checkedVariant, setCheckedVariant] = useState(null)
     const [imageCounter, setImageCounter] = useState(0)
     const [ addedConfirmed, setAddedConfirmed ] = useState(false)
     const [selectedColors, setSelectedColors] = useState({});
     const [counter, setCounter] = useState(1)
-
+    if (!product) {
+        return <NotFound />
+    }
+    
     useEffect(() => {
         const newProduct = products.find(p => p.id == id)
         setProduct(newProduct)
-        setCheckedVariant(newProduct.variants[0].id)
+
+        if(newProduct) setCheckedVariant(newProduct.variants[0].id)
+
         setImageCounter(0)
         setSelectedColors({})
         setAddedConfirmed(false)
@@ -235,8 +239,8 @@ const ProductDetails = () => {
                 
                 <>
                     <p className="article_price">₦<b>{product.variants[0].price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
-                    {Boolean(product.attributes?.length)  && 
-                        product.attributes.map((prop, index) => (<Fragment key={index}> <span>{prop.name}</span>: <span>{prop.value}</span></Fragment>))
+                    {Boolean(product.variants[0].attributes?.length)  && 
+                        product.variants[0].attributes.map((prop, index) => (<Fragment key={index}> <strong>{prop.name}</strong>: <span>{prop.value}</span></Fragment>))
                     }
                     <p> Total: 
                         <strong>₦{product.variants[0]?.price * (hasSelectedColors ? selectedColorTotal: counter)}</strong>
@@ -273,7 +277,7 @@ const ProductDetails = () => {
             </div>
 
             <div className='articleActionBtns'>
-                <a target="_blank" className='buyNowBtn'
+                <a target="_blank" rel="noopener noreferrer" className='buyNowBtn'
                     href={`https://wa.me/${PHONENUMBER}?text=${encodeURIComponent(buyNow(product.id, (hasSelectedColors ? selectedColorTotal : counter), checkedVariant, selectedColors))}`}
                 >
                     Buy Now

@@ -38,7 +38,7 @@ const Home = () => {
                     </div>
                 )}
             </nav>
-            <a target="_blank" href="https://wa.me/2348100153987">
+            <a target="_blank" rel="noopener noreferrer" href="https://wa.me/2348100153987">
                 <img src={WHATSAPP_ICON} alt="Whatsapp Chat" title="Chat on Whatsapp" className="whatsapp_icon"/>
             </a>   
 

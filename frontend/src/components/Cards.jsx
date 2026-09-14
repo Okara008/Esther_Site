@@ -68,11 +68,18 @@ const Cards = ({product}) => {
     const [ addedConfirmed, setAddedConfirmed ] = useState(false)
     const PHONENUMBER = "2348100153987"
 
+    useEffect(() => {
+        setSelectedVariant(product.variants[0].id)
+    }, [product])
+
     return (
         <div className='individual_card' >
             <Link className='individual_card_link' to={`/product/${product.id}`} >
                 <img src={image} alt="product images" height={100} className="product_img"/>
                 <h2>{product.name}</h2>
+            </Link>
+
+            <div className="cartPricesContainer">
                 {
                     product.variants.length > 1 ?
                     <select onClick={(e)=> e.preventDefault()} name='selectedVariant' onChange={(e) => setSelectedVariant(Number(e.target.value))}>
@@ -92,10 +99,10 @@ const Cards = ({product}) => {
                     </>
                 
                 }
-            </Link>
+            </div>
 
             <div className='cardActionBtnContainer'>
-                <a target="_blank" className='buyNowBtn'
+                <a target="_blank" rel="noopener noreferrer" className='buyNowBtn'
                     href={`https://wa.me/${PHONENUMBER}?text=${encodeURIComponent(buyNow(product.id, selectedVariant))}`}
                 >
                     Buy Now

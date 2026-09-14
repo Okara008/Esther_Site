@@ -122,7 +122,9 @@ article.productContainer .product_img img{
 .article_counter button.disableBtn{
     background-color: gray;
 }
-
+strong{
+    text-transform: capitalize;
+}
 .article_counter button:not(.disableBtn):hover{
     width: 2rem;
     background-color: var(--primary-hover);

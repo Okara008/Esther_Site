@@ -16,7 +16,8 @@ const checkout = (selectedProducts, product_details, total) => {
 
         selectedProducts.map((product, count) =>{
             let copy = product_details.find(p => p.id == product.id)
-
+            if (!copy) return "";
+            
             let details = {
                 name: copy.name.toUpperCase(),
                 variant_details: copy.variants[0],
@@ -79,10 +80,12 @@ const Cart = ({setDisplayCart}) => {
                 const product = product_details.find(
                     product => product.id === cartItem.id
                 );
-                    
+                if(!product) total
+                
                 const variant = product.variants.find(
                     variant => variant.id === cartItem.variant.id
                 );
+                if(!variant) total
                 return total + variant.price * cartItem.variant.amount;
             }, 0)
         )
@@ -113,7 +116,7 @@ const Cart = ({setDisplayCart}) => {
                     <div>
                         <button className="remove" onClick={() => setDisplayCart(false)}>Continue Shopping</button>
                         <a
-                            target="_blank"
+                            target="_blank" rel="noopener noreferrer"
                             className='checkOut'
                             onClick={(e) => {
                                 // console.log(checkout(selectedProducts, product_details, total))
