@@ -14,6 +14,16 @@ const Header = () => {
     const {selectedProducts, setSearchText} = useContext(CartContext)
     const [darkMode, setDarkMode] = useState(mediaQuery);
     const [displayCart, setDisplayCart] = useState(!true)
+    const [cartNumber, setCartNumber] = useState(0)
+
+    useEffect(() => {
+        let total_items = 0
+        for(let i = 0; i < selectedProducts.length; i++) {
+            const amount = selectedProducts[i].variant.amount;
+            total_items += amount
+        }
+        setCartNumber(total_items)
+    }, [selectedProducts])
 
     useEffect(() => {
         document.documentElement.setAttribute(
@@ -37,7 +47,7 @@ const Header = () => {
 
     return (
         <header>
-            <Link to='/'><img src={LOGO_ICON} alt="icon" height={50} className='logo_icon'/></Link>
+            <Link to='/' className='logo_icon'><img src={LOGO_ICON} alt="icon" height={50} /></Link>
             
             <div className="search_container">
                 <input type="text" placeholder='Search...' onChange={(e) => setSearchText(e.target.value)} className='search_input'/>
@@ -53,7 +63,7 @@ const Header = () => {
 
             <div className="cartImgContainer" onClick={() => setDisplayCart(true)}>
                 <img src={CART_ICON} alt="cart" height={50} className='cart_icon'/>
-                <p>{selectedProducts.length}</p>
+                <p>{cartNumber}</p>
             </div>
 
             {displayCart && (<Cart setDisplayCart={setDisplayCart} selectedProducts={selectedProducts}/>)}

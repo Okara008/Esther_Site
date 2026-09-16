@@ -75,31 +75,31 @@ const Cards = ({product}) => {
     return (
         <div className='individual_card' >
             <Link className='individual_card_link' to={`/product/${product.id}`} >
-                <img src={image} alt="product images" height={100} className="product_img"/>
+                <div className="product_img"><img src={image} alt="product images" height={100}/></div>
                 <h2>{product.name}</h2>
+                <div className="cartPricesContainer">
+                    {
+                        product.variants.length > 1 ?
+                        <select onClick={(e)=> e.preventDefault()} name='selectedVariant' onChange={(e) => setSelectedVariant(Number(e.target.value))}>
+                            {product.variants.map((p, index) => (
+                                <option value={p.id} key={index}>
+                                    {p.name}: ₦{p.price} per {product.unit}
+                                </option>
+                            ))}
+                        </select>
+                        :
+                        <>
+                            {product.variants.map((p, index) => (
+                                <span key={index}>
+                                    <strong>₦{p.price}</strong> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}
+                                </span>
+                            ))}
+                        </>
+                    
+                    }
+                </div>
             </Link>
 
-            <div className="cartPricesContainer">
-                {
-                    product.variants.length > 1 ?
-                    <select onClick={(e)=> e.preventDefault()} name='selectedVariant' onChange={(e) => setSelectedVariant(Number(e.target.value))}>
-                        {product.variants.map((p, index) => (
-                            <option value={p.id} key={index}>
-                                {p.name}: ₦{p.price} per {product.unit}
-                            </option>
-                        ))}
-                    </select>
-                    :
-                    <>
-                        {product.variants.map((p, index) => (
-                            <span key={index}>
-                                ₦{p.price} per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}
-                            </span>
-                        ))}
-                    </>
-                
-                }
-            </div>
 
             <div className='cardActionBtnContainer'>
                 <a target="_blank" rel="noopener noreferrer" className='buyNowBtn'
@@ -108,7 +108,7 @@ const Cards = ({product}) => {
                     Buy Now
                 </a>
 
-                <button disabled={addedConfirmed} className={`addBtn ${addedConfirmed && "addedConfirmBtn"}`}
+                <button disabled={addedConfirmed} className={`addBtn ${addedConfirmed ? "addedConfirmBtn" : ""}`}
                     onClick={() => addToCart(product.id, setSelectedProducts, selectedVariant, setAddedConfirmed)}
                 >
                     {!addedConfirmed ? "Add to cart" : "Added ..."}

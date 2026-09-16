@@ -101,34 +101,43 @@ const Cart = ({setDisplayCart}) => {
         <div className="outerShell">
             <section className="cartSection">
                 <h3>{amoutOfItems} Item(s) Selected [{selectedProducts.length} product(s)]</h3>
-                <div className="notTotalSection">
-                    {Boolean(selectedProducts.length) && (
-                        <section className="cartItemsContainer">
-                            {selectedProducts.map((cartItem, index) => 
-                                <CartProduct key={`${cartItem.id}-${cartItem.variant.id}`} setDisplayCart={setDisplayCart} cartItem={cartItem} setSelectedProducts={setSelectedProducts} selectedProducts={selectedProducts} index={index} />)}
-                        </section>
-                    )}
-                </div>
+                {Boolean(selectedProducts.length) ? (
+                    <section className="cartItemsContainer">
+                        {selectedProducts.map((cartItem, index) => 
+                            <CartProduct key={`${cartItem.id}-${cartItem.variant.id}`} setDisplayCart={setDisplayCart} cartItem={cartItem} setSelectedProducts={setSelectedProducts} selectedProducts={selectedProducts} index={index} />)}
+                    </section>
+                )
+
+                : 
+                
+                (
+                    <div className="emptyCart">
+                        <h2>Your cart is empty</h2>
+                        <p>Add some products to your cart and they'll appear here.</p>
+                    </div>
+                )}
 
                 <section className="bottomCartSection">
                     <div className='totalSection'>Total: <strong>₦{total.toLocaleString()}</strong></div>
 
                     <div>
                         <button className="remove" onClick={() => setDisplayCart(false)}>Continue Shopping</button>
-                        <a
-                            target="_blank" rel="noopener noreferrer"
-                            className='checkOut'
-                            onClick={(e) => {
-                                // console.log(checkout(selectedProducts, product_details, total))
-                                if (!selectedProducts.length) e.preventDefault()
-                            }}
+                        {Boolean(selectedProducts.length) && (
+                            <a
+                                target="_blank" rel="noopener noreferrer"
+                                className='checkOut'
+                                onClick={(e) => {
+                                    // console.log(checkout(selectedProducts, product_details, total))
+                                    if (!selectedProducts.length) e.preventDefault()
+                                }}
                             href={`https://wa.me/${PHONENUMBER}?text=${encodeURIComponent( checkout(selectedProducts, product_details, total) )}`}
-                        >
-                            Check Out <img src={WHATSAPP_ICON} alt="whatsapp" />
-                        </a>
+                            >
+                                Check Out <img src={WHATSAPP_ICON} alt="whatsapp" />
+                            </a>
+                        )}
                     </div>
                 </section>
-            </section>
+        </section>
 
         </div>
     )

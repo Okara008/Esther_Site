@@ -10,6 +10,12 @@
     --border: #e6c3cd;
 }
 
+:root{
+    --radius-sm: .5rem;
+    --radius-md: .75rem;
+    --radius-lg: 1.25rem;
+}
+
 [data-theme="dark"] {
     --text: #F8EEF1;
     --inverted-text: black;
@@ -22,7 +28,9 @@
     --border: #49383E;
 }
 
-*{
+*,
+*::before,
+*::after{
     box-sizing: border-box;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
@@ -48,3 +56,43 @@ body{
 .NotFoundLink:hover{
     color: var(--primary-hover);
 }
+
+[data-theme="dark"] .individual_card,
+[data-theme="dark"] .cartItem{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, .3);
+}
+
+[data-theme="dark"] .individual_card_link .product_img,
+[data-theme="dark"] article.productContainer .product_img{
+    background-color: #211b1e;
+}
+
+[data-theme="dark"] .search_container{
+    background-color: #211b1e;
+}
+
+[data-theme="dark"] .variant_details input[type="radio"]:checked + label{
+    box-shadow: 0 4px 15px rgba(0, 0, 0, .35);
+}
+
+button,
+a,
+select{
+    transition: background-color .2s ease,
+                border-color .2s ease,
+                box-shadow .2s ease,
+                transform .2s ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+input:focus-visible{
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+}
+
+img{
+    max-width: 100%;
+}
+

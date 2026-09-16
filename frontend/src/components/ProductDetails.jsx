@@ -66,14 +66,13 @@ const buyNow = (currentId, amount, currentVariantId, selectedColors) => {
     .map(([colorName, value]) => `${colorName} (x${value.count})`);
     
     if(!currentVariant) return
-    console.log(currentId, currentVariant.name);
     const display = `Name - ${currentProduct.name} - ${currentVariant.name} \nAmount - ${amount} ${currentProduct.unit}(s) \nPrice - ₦${currentVariant.price} per ${currentProduct.unit} \nColors - ${formattedColors.length > 0 ? formattedColors : "none"} \n\n\nTotal - ${currentVariant.price * amount}`
     return display
 }
 
 const ProductDetails = () => {
     const PHONENUMBER = "2348100153987"
-
+    
     const {setSelectedProducts} = useContext(CartContext)
     let { id } = useParams()
     id = Number(id)
@@ -177,12 +176,11 @@ const ProductDetails = () => {
                             </div>
                         ))}
                     </div>
-
                     <div className="selected_colors_summary">
                         {Object.entries(selectedColors)
                             .filter(([_, value]) => value.checked)
                             .map(([colorName, value]) => (
-                                <div key={colorName} className="selected_color_item" style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: '4px 0' }}>
+                                <div key={colorName} className="selected_color_item" >
                                     <span>{colorName}</span>
 
                                     <div className="article_counter">
@@ -201,7 +199,7 @@ const ProductDetails = () => {
                                                     ...prev[colorName],
                                                     count: isNaN(e.target.value) ? 1 : Number(e.target.value)
                                                 }
-                                            }))} 
+                                            }))}
                                         />
 
                                         <button onClick={() => handleColorCounter(colorName, 1)}>+</button>
@@ -224,70 +222,116 @@ const ProductDetails = () => {
                                     <h4 className="variant_name">{variant.name}</h4>
                                     <p className="variant_price">₦<b>{variant.price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
                                     {Boolean(variant.attributes.length)  && 
-                                        variant.attributes.map((prop, index) => (<div key={index}> <strong>{prop.name}</strong>: <span>{prop.value}</span></div>))
+                                        variant.attributes.map((prop, index) => (
+                                            <div key={index} className="product_attribute">
+                                                <strong>{prop.name}</strong>
+                                                <span>{prop.value}</span>
+                                            </div>
+                                        ))
                                     }
                                 </label>
                             </Fragment>
                         ))}
                     </div>
-                    <p> Total: 
+                    <div className="totalCounter">
+
+                    <p className="article_total"> Total: 
                         <strong>₦{product.variants.find(v => v.id == checkedVariant)?.price * (hasSelectedColors ? selectedColorTotal: counter)}</strong>
                     </p>
+
+                    <div className="article_counter">
+                        <button disabled={hasSelectedColors} className={hasSelectedColors ? "disableBtn" : ""} onClick={() => handleProductCounter(-1)}>-</button>
+
+                        <input type="text" inputMode="numeric"
+                            value={hasSelectedColors ? selectedColorTotal : counter} 
+                            readOnly={hasSelectedColors}
+                            onChange={(e) => 
+                                setCounter(prev => {
+                                    const num = Number(e.target.value)
+                                    if(isNaN(num) || num < 0){
+                                        return prev
+                                    }
+                                    return num
+                                })
+                            } 
+                            onBlur={(e) => setCounter(prev => {
+                                    const num = Number(e.target.value)
+                                    if(num < 1){
+                                        return 1
+                                    }
+                                    return num
+                                })
+                            }
+                        />
+
+                        <button disabled={hasSelectedColors}  className={hasSelectedColors ? "disableBtn" : ""} onClick={() => handleProductCounter(1)}>+</button>
+                    </div>
+
+                    </div>
                 </>
                 
                 :
                 
                 <>
-                    <p className="article_price">₦<b>{product.variants[0].price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
+                    <p className="article_price"><b>₦{product.variants[0].price}</b> per {product.unit} {product.unit.toLowerCase() == 'pack' && `[${product.quantity} items]`}</p>
                     {Boolean(product.variants[0].attributes?.length)  && 
-                        product.variants[0].attributes.map((prop, index) => (<Fragment key={index}> <strong>{prop.name}</strong>: <span>{prop.value}</span></Fragment>))
-                    }
-                    <p> Total: 
-                        <strong>₦{product.variants[0]?.price * (hasSelectedColors ? selectedColorTotal: counter)}</strong>
-                    </p>
+                        product.variants[0].attributes.map((prop, index) => (
+                            <div key={index} className="product_attribute">
+                            <strong>{prop.name}</strong>
+                            <span>{prop.value}</span>
+                        </div>
+                    ))}
+                    <div className="totalCounter">
+                        <div className="article_counter">
+                            <button disabled={hasSelectedColors} className={hasSelectedColors ? "disableBtn" : ""} onClick={() => handleProductCounter(-1)}>-</button>
+
+                            <input type="text" inputMode="numeric"
+                                value={hasSelectedColors ? selectedColorTotal : counter} 
+                                readOnly={hasSelectedColors}
+                                onChange={(e) => 
+                                    setCounter(prev => {
+                                        const num = Number(e.target.value)
+                                        if(isNaN(num) || num < 0){
+                                            return prev
+                                        }
+                                        return num
+                                    })
+                                } 
+                                onBlur={(e) => setCounter(prev => {
+                                        const num = Number(e.target.value)
+                                        if(num < 1){
+                                            return 1
+                                        }
+                                        return num
+                                    })
+                                }
+                            />
+
+                            <button disabled={hasSelectedColors}  className={hasSelectedColors ? "disableBtn" : ""} onClick={() => handleProductCounter(1)}>+</button>
+                        </div>
+                        
+                        <p className="article_total"> Total: 
+                            <strong>₦{product.variants[0]?.price * (hasSelectedColors ? selectedColorTotal: counter)}</strong>
+                        </p>
+
+
+                    </div>
                 </>
             }
 
-            <div className="article_counter">
-                <button disabled={hasSelectedColors} className={hasSelectedColors ? "disableBtn" : ""} onClick={() => handleProductCounter(-1)}>-</button>
-
-                <input type="text" inputMode="numeric"
-                    value={hasSelectedColors ? selectedColorTotal : counter} 
-                    readOnly={hasSelectedColors}
-                    onChange={(e) => 
-                        setCounter(prev => {
-                            const num = Number(e.target.value)
-                            if(isNaN(num) || num < 0){
-                                return prev
-                            }
-                            return num
-                        })
-                    } 
-                    onBlur={(e) => setCounter(prev => {
-                            const num = Number(e.target.value)
-                            if(num < 1){
-                                return 1
-                            }
-                            return num
-                        })
-                    }
-                />
-
-                <button disabled={hasSelectedColors}  className={hasSelectedColors ? "disableBtn" : ""} onClick={() => handleProductCounter(1)}>+</button>
-            </div>
-
             <div className='articleActionBtns'>
+                <button disabled={addedConfirmed} className={`addBtn ${addedConfirmed ? "article_button_disabled" : ""}`}
+                    onClick={(e) => addToCart(product.id, setSelectedProducts, (hasSelectedColors ? selectedColorTotal : counter), checkedVariant, selectedColors, setAddedConfirmed)}
+                >
+                    {!addedConfirmed ? "Add to cart" : "Added ..."}
+                </button>
+
                 <a target="_blank" rel="noopener noreferrer" className='buyNowBtn'
                     href={`https://wa.me/${PHONENUMBER}?text=${encodeURIComponent(buyNow(product.id, (hasSelectedColors ? selectedColorTotal : counter), checkedVariant, selectedColors))}`}
                 >
                     Buy Now
                 </a>
 
-                <button disabled={addedConfirmed} className={`addBtn ${addedConfirmed && "article_button"}`}
-                    onClick={(e) => addToCart(product.id, setSelectedProducts, (hasSelectedColors ? selectedColorTotal : counter), checkedVariant, selectedColors, setAddedConfirmed)}
-                >
-                    {!addedConfirmed ? "Add to cart" : "Added ..."}
-                </button>
             </div>
         </div>
     </article>

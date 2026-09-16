@@ -45,8 +45,13 @@ const Home = () => {
             <section className="cardsSection">
                 {displayedProducts.map(product => <Cards setSelectedProducts={setSelectedProducts} product={product} key={products.indexOf(product)}/> )}
 
-                {!displayedProducts.length && (<span>No Product Available...</span>)}
             </section>
+            {!displayedProducts.length && (
+                <div className="emptyProducts">
+                    <h2>No products found</h2>
+                    <p>Try searching for something else or choose another category.</p>
+                </div>
+            )}
         </main>
     )
 }
