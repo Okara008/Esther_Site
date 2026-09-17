@@ -7,7 +7,7 @@ import { CartContext } from "./CartContext";
 const filterProducts = (category, setDisplayedProducts, searchText) => {
     setDisplayedProducts([...products])
     if(searchText){
-        setDisplayedProducts(prev => (prev.filter(p => p.name.includes(searchText) || p.category.includes(searchText) || p.variants.some(v => v.name.includes(searchText)))))
+        setDisplayedProducts(prev => (prev.filter(p => p.name.toLowerCase().includes(searchText.toLowerCase()) || p.category.toLowerCase().includes(searchText.toLowerCase()) || p.variants.some(v => v.name.toLowerCase().includes(searchText.toLowerCase())))))
     }
     if(!category) return
     setDisplayedProducts(prev => prev.filter(product => product.category == category))
