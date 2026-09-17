@@ -374,7 +374,7 @@ strong{
 }
 
 .article_total strong{
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: var(--primary);
 }
 
@@ -382,7 +382,7 @@ strong{
     margin-top: 1rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .totalCounter .article_total{
