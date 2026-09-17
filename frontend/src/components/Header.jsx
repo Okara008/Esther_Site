@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import LOGO_ICON from '../assets/icons/icon_black.png'
 import CART_ICON from '../assets/icons/shopping-cart.png'
@@ -10,6 +10,7 @@ import { useState , useEffect, useContext } from "react";
 import { CartContext } from "./CartContext";
 
 const Header = () => {
+    const { pathname } = useLocation();
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const {selectedProducts, setSearchText} = useContext(CartContext)
     const [darkMode, setDarkMode] = useState(mediaQuery);
@@ -49,23 +50,26 @@ const Header = () => {
         <header>
             <Link to='/' className='logo_icon'><img src={LOGO_ICON} alt="icon" height={50} /></Link>
             
-            <div className="search_container">
-                <input type="text" placeholder='Search...' onChange={(e) => setSearchText(e.target.value)} className='search_input'/>
-                <button className='search_icon'><img src={SEARCH_ICON} alt="icon"/></button>
+            {pathname === '/' && (
+                <div className="search_container">
+                    <input type="text" placeholder='Search...' onChange={(e) => setSearchText(e.target.value)} className='search_input'/>
+                    <button className='search_icon'><img src={SEARCH_ICON} alt="icon"/></button>
+                </div>
+            )}
+
+            <div className='headerIcons'>
+                <img 
+                    src={darkMode ? DARK_ICON : LIGHT_ICON} alt="icon" height={50} 
+                    className={`${darkMode ? "togggle_theme" : ""} theme_icon`} 
+                    onClick={toggleTheme}
+                    title={`${darkMode ? "Dark Mode" : "Light Mode"}`} 
+                />
+
+                <div className="cartImgContainer" onClick={() => setDisplayCart(true)}>
+                    <img src={CART_ICON} alt="cart" height={50} className='cart_icon'/>
+                    <p>{cartNumber}</p>
+                </div>
             </div>
-
-            <img 
-                src={darkMode ? DARK_ICON : LIGHT_ICON} alt="icon" height={50} 
-                className={`${darkMode ? "togggle_theme" : ""} theme_icon`} 
-                onClick={toggleTheme}
-                title={`${darkMode ? "Dark Mode" : "Light Mode"}`} 
-            />
-
-            <div className="cartImgContainer" onClick={() => setDisplayCart(true)}>
-                <img src={CART_ICON} alt="cart" height={50} className='cart_icon'/>
-                <p>{cartNumber}</p>
-            </div>
-
             {displayCart && (<Cart setDisplayCart={setDisplayCart} selectedProducts={selectedProducts}/>)}
         </header>
     )

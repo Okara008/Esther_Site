@@ -151,6 +151,14 @@ header .logo_icon:hover{
     box-sizing: border-box;
 }
 
+.headerIcons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+
 @media (max-width: 1100px){
     .header{
         padding: .8rem 1.5rem;
