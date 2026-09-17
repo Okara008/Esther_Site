@@ -263,6 +263,9 @@ strong{
 }
 
 .article_color{
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
     gap: .75rem;
@@ -301,22 +304,24 @@ strong{
 }
 
 .selected_colors_summary{
-    max-height: 12rem;
     display: flex;
     font-size: .8rem;
-    gap: 1rem;
-    overflow-y: auto;
     margin-top: .75rem;
-    padding: .75rem;
     background-color: var(--secondary);
     border-radius: .75rem;
-    flex-wrap: wrap;
+    max-height: none;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: .5rem;
+    padding: .5rem;
 }
 .selected_colors_summary > *{
     background-color: rgba(128, 128, 128, 0.2);
-    padding: 1rem;
-    border-radius: 1rem;
     text-transform: capitalize;
+    flex: 0 0 auto;
+    padding: .5rem .6rem;
+    border-radius: .6rem;
 }
 
 .selected_colors_summary > * > *{
@@ -324,7 +329,7 @@ strong{
 }
 
 .selected_colors_summary::-webkit-scrollbar, .article_color::-webkit-scrollbar{
-    width: 5px;
+    height: 4px;
 }
 
 .selected_colors_summary::-webkit-scrollbar-thumb, .article_color::-webkit-scrollbar-thumb{
@@ -451,18 +456,68 @@ strong{
 
 @media (max-width: 600px){
     .productContainer{
+        gap: 1rem;
+        padding: .75rem;
         grid-template-columns: 1fr;
         grid-template-rows: max-content;
-        gap: 1.5rem;
-        padding: 1rem;
+    }
+    
+    .productContainer > *{
+        min-width: 0;
     }
 
     .product_img{
-        height: 24rem;
+        height: 16rem;
+    }
+    
+    .article_name{
+        font-size: 1.6rem;
     }
 
-    .article_name{
-        font-size: 1.8rem;
+    .article_color{
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: .5rem;
+        gap: .5rem;
+        font-size: .85rem;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .article_color > div{
+        flex: 0 0 auto;
+        padding: .5rem .7rem;
+    }
+
+    .selected_colors_summary > *{
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+
+    .selected_colors_summary{
+        gap: .5rem;
+        padding: .5rem;
+        margin-top: .5rem;
+    }
+
+    .selected_colors_summary > *{
+        padding: .5rem .6rem;
+        border-radius: .6rem;
+    }
+
+    .selected_colors_summary .article_counter{
+        gap: .2rem;
+    }
+
+    .selected_colors_summary .article_counter button{
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .selected_colors_summary .article_counter input{
+        width: 2rem;
+        height: 1.5rem;
     }
 
     .articleActionBtns{
@@ -470,6 +525,6 @@ strong{
     }
 
     .totalCounter{
-        gap: .75rem;
+        gap: .5;
     }
 }

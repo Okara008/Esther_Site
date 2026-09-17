@@ -3,10 +3,10 @@
 .product_category{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: safe center;
     gap: 1rem;
     font-size: 1rem;
-
+    overflow-x: scroll;
     padding: .75rem 1rem;
     margin: 0 2rem 2.5rem;
 
@@ -14,8 +14,22 @@
     border-radius: 1rem;
 }
 
-.product_category::-webkit-scrollbar{
+/* .product_category::-webkit-scrollbar{
     display: none;
+} */
+
+.product_category::-webkit-scrollbar{
+    height: 5px;
+}
+
+.product_category::-webkit-scrollbar-thumb{
+    background-color: var(--primary);
+    border-radius: 10px;
+}
+
+.product_category::-webkit-scrollbar-track{
+    background-color: var(--secondary);
+    border-radius: 10px;
 }
 
 .product_category div{
@@ -118,10 +132,15 @@
         padding: 0 1rem;
     }
 
-    .categoryNav{
-        margin-inline: 1rem;
+    .product_category{
         justify-content: flex-start;
         overflow-x: auto;
+        flex-wrap: nowrap;
+        padding: .5rem;
+    }
+
+    .product_category button{
+        flex: 0 0 auto;
     }
 
     .whatsappIcon{

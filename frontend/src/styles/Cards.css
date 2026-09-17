@@ -155,3 +155,45 @@
 .individual_card .cardActionBtnContainer .buyNowBtn:hover{
     background-color: var(--bg);
 }
+
+/* @media (max-width: 600px){
+} */
+
+@media (max-width: 600px){
+    .cardsSection{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        padding: 0 .75rem;
+    }
+    .cardsSection .individual_card{
+        width: 100%;
+        border-radius: .75rem;
+    }
+
+    .individual_card .individual_card_link{
+        padding: .5rem .5rem 0;
+    }
+
+    .individual_card_link .product_img{
+        height: 10rem;
+    }
+
+    .individual_card_link h2{
+        font-size: 1rem;
+        margin: .6rem 0 .25rem;
+    }
+
+    .cartPricesContainer{
+        padding: 0 .6rem .6rem;
+    }
+
+    .individual_card .cardActionBtnContainer{
+        padding: 0 .6rem .6rem;
+        gap: .35rem;
+    }
+
+    .individual_card .cardActionBtnContainer > *{
+        padding: .5rem;
+        font-size: .75rem;
+    }
+}

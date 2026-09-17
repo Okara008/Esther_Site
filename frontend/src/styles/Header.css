@@ -5,7 +5,7 @@ header{
     gap: 2rem;
 
     position: sticky;
-    top: 0;
+    top: 10px;
     z-index: 10;
 
     background-color: var(--primary);
@@ -170,19 +170,14 @@ header .logo_icon:hover{
 }
 
 @media (max-width: 600px){
-    .header{
+    header{
         flex-wrap: wrap;
         padding: .75rem 1rem;
     }
 
     .search_container{
-        padding: 0 1.25rem 0 .75rem;
-        gap: .4rem;
-        max-width: none;
-    }
-    
-    .search_input{
-        flex-basis: 100%;
         order: 3;
+        flex-basis: 100%;
+        max-width: none;
     }
 }
