@@ -235,10 +235,6 @@ const ProductDetails = () => {
                     </div>
                     <div className="totalCounter">
 
-                    <p className="article_total"> Total: 
-                        <strong>₦{product.variants.find(v => v.id == checkedVariant)?.price * (hasSelectedColors ? selectedColorTotal: counter)}</strong>
-                    </p>
-
                     <div className="article_counter">
                         <button disabled={hasSelectedColors} className={hasSelectedColors ? "disableBtn" : ""} onClick={() => handleProductCounter(-1)}>-</button>
 
@@ -266,6 +262,10 @@ const ProductDetails = () => {
 
                         <button disabled={hasSelectedColors}  className={hasSelectedColors ? "disableBtn" : ""} onClick={() => handleProductCounter(1)}>+</button>
                     </div>
+
+                    <p className="article_total"> Total: 
+                        <strong>₦{product.variants.find(v => v.id == checkedVariant)?.price * (hasSelectedColors ? selectedColorTotal: counter)}</strong>
+                    </p>
 
                     </div>
                 </>

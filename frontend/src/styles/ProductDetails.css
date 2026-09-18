@@ -253,6 +253,10 @@ strong{
     text-decoration: underline;
 }
 
+.variant_details input[type="radio"]{
+    display: none;
+}
+
 .variant_details input[type="radio"]:checked + label{
     background-color: var(--primary);
     border-color: var(--primary);
@@ -526,5 +530,44 @@ strong{
 
     .totalCounter{
         gap: .5;
+    }
+
+    .variant_details{
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: .5rem;
+        padding-bottom: .3rem;
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .variant_details label{
+        flex: 0 0 auto;
+        min-width: 7rem;
+        padding: .7rem;
+        border-radius: .6rem;
+    }
+    
+    .variant_details h4{
+        font-size: 1rem;
+    }
+    
+    .variant_details .variant_price{
+        font-size: .85rem;
+    }
+
+    .variant_details::-webkit-scrollbar{
+        height: 5px;
+    }
+    
+    .variant_details::-webkit-scrollbar-thumb{
+        background-color: var(--primary);
+        border-radius: 10px;
+    }
+    
+    .variant_details::-webkit-scrollbar-track{
+        background-color: var(--secondary);
+        border-radius: 10px;
     }
 }

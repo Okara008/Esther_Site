@@ -9,9 +9,9 @@ return(
             Copyright &copy; {date.getFullYear()} Estelle Hair Accessory. All rights reserved.
         </div>
         <div className='social_handles'>
-            <a href="" title='Visit the SnapChat page'><img src={SNAP_ICON} alt="Snapchat" /></a>
+            <a href="https://www.snapchat.com/add/esther_okara23?share_id=yoCfEUuPg88&locale=en-US" target='_blank' title='Visit the SnapChat Page'><img src={SNAP_ICON} alt="Snapchat" /></a>
 
-            <a href="" title='Visit the Instagram page'><img src={IG_ICON} alt="Instagram" /></a>
+            <a href="" title='Visit the Instagram Page'><img src={IG_ICON} alt="Instagram" /></a>
         </div>
     </footer>
 )
