@@ -70,7 +70,7 @@ const buyNow = (currentId, amount, currentVariantId, selectedColors) => {
     return display
 }
 
-const ProductDetails = () => {
+const Product = () => {
     const PHONENUMBER = "2348100153987"
     
     const {setSelectedProducts} = useContext(CartContext)
@@ -214,6 +214,7 @@ const ProductDetails = () => {
 
             {product.variants?.length > 1 ?
                 <>
+                    <h3 className="variant_heading">Choose a variant</h3>
                     <div className="variant_details">
                         {product.variants.map((variant, index) => (
                             <Fragment key={variant.id}>  
@@ -337,4 +338,4 @@ const ProductDetails = () => {
     </article>
     )
 }
-export default ProductDetails
+export default Product

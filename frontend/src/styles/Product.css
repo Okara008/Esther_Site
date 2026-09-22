@@ -250,7 +250,7 @@ strong{
 }
 
 .variant_details .variant_price b{
-    text-decoration: underline;
+    font-size:1.3rem;
 }
 
 .variant_details input[type="radio"]{
@@ -264,6 +264,11 @@ strong{
     color: var(--inverted-text);
 
     box-shadow: 0 5px 15px rgba(0, 0, 0, .15);
+}
+
+.article_price b{
+    font-size:2.2rem;
+    color:var(--primary);
 }
 
 .article_color{

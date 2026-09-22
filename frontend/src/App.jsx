@@ -7,10 +7,10 @@ import './styles/Footer.css'
 import './styles/Home.css'
 import './styles/Cards.css'
 import './styles/Cart.css'
-import './styles/ProductDetails.css'
+import './styles/Product.css'
 import Header from './components/Header'
 import Home from './components/Home'
-import ProductDetails from './components/ProductDetails'
+import Product from './components/Product'
 import Footer from './components/Footer'
 import CartItemProvider from './components/CartContext'
 import NotFound from './components/NotFound';
@@ -32,7 +32,7 @@ function App() {
             <Header/>
             <Routes>
                 <Route path='/' element={<Home/>}/>
-                <Route path='/product/:id' element={<ProductDetails />}/>
+                <Route path='/product/:id' element={<Product />}/>
                 <Route path="*" element={<NotFound />} />
             </Routes>
             <Footer/>
